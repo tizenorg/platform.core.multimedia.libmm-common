@@ -1,0 +1,3 @@
+@PREFIX@/include/mmf/mm_attrs.h
+@PREFIX@/include/mmf/mm_attrs_private.h
+@PREFIX@/include/mmf/mm_debug.h
