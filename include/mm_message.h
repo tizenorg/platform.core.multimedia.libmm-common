@@ -42,19 +42,18 @@
  * Enumerations of messages type.
 */
 enum MMMessageType {
-
 	/* COMMON */
 	MM_MESSAGE_UNKNOWN = 0x00,			/**< Unknown message type */
-	MM_MESSAGE_ERROR,					/**< Error message type */
-	MM_MESSAGE_WARNING,					/**< Warning message type */
+	MM_MESSAGE_ERROR,				/**< Error message type */
+	MM_MESSAGE_WARNING,				/**< Warning message type */
 	MM_MESSAGE_STATE_CHANGED,			/**< State change message type */
-	MM_MESSAGE_STATE_INTERRUPTED, 	/**< State change by interrupt */
+	MM_MESSAGE_STATE_INTERRUPTED,			/**< State change by interrupt */
 	MM_MESSAGE_READY_TO_RESUME, 			/**< Ready to resume message type */
 
 	/* PLAYER */
-	MM_MESSAGE_CONNECTING = 0x100,		/**< Connecting message type */
+	MM_MESSAGE_CONNECTING = 0x100,			/**< Connecting message type */
 	MM_MESSAGE_CONNECTED,				/**< Rtspsrc has successed to connecting to server */
-	MM_MESSAGE_CONNECTION_TIMEOUT,		/**< Connection timeout message type */
+	MM_MESSAGE_CONNECTION_TIMEOUT,			/**< Connection timeout message type */
 	MM_MESSAGE_BUFFERING,				/**< Buffering message type */
 	MM_MESSAGE_BEGIN_OF_STREAM,			/**< Streaming begin message type */
 	MM_MESSAGE_END_OF_STREAM,			/**< End of stream message type */
@@ -62,57 +61,55 @@ enum MMMessageType {
 	MM_MESSAGE_BLUETOOTH_OFF,			/**< Bluetooth A2DP Connection OFF */
 	MM_MESSAGE_RESUMED_BY_REW,			/**< Resumed by fast rewind message type */
 	MM_MESSAGE_UPDATE_SUBTITLE,			/**< Update subtitle type */
-	MM_MESSAGE_RTP_SENDER_REPORT,		/**< RTP sender report */
-	MM_MESSAGE_RTP_RECEIVER_REPORT,		/**< RTP receiver report */
-	MM_MESSAGE_RTP_SESSION_STATUS,		/**< RTP session status */
+	MM_MESSAGE_RTP_SENDER_REPORT,			/**< RTP sender report */
+	MM_MESSAGE_RTP_RECEIVER_REPORT,			/**< RTP receiver report */
+	MM_MESSAGE_RTP_SESSION_STATUS,			/**< RTP session status */
 	MM_MESSAGE_SENDER_STATE,			/**< Sender state */
 	MM_MESSAGE_RECEIVER_STATE,			/**< Receiver state */
-	MM_MESSAGE_FILE_NOT_SUPPORTED,		/**< Not supported file */
+	MM_MESSAGE_FILE_NOT_SUPPORTED,			/**< Not supported file */
 	MM_MESSAGE_FILE_NOT_FOUND,			/**< Not founded file */
-	MM_MESSAGE_DRM_NOT_AUTHORIZED,		/**< Not authorized to play the content */
+	MM_MESSAGE_DRM_NOT_AUTHORIZED,			/**< Not authorized to play the content */
 	MM_MESSAGE_VIDEO_CAPTURED,			/**< Video frame has been captured */
-	MM_MESSAGE_VIDEO_NOT_CAPTURED,		/**< video capture failed */
+	MM_MESSAGE_VIDEO_NOT_CAPTURED,			/**< video capture failed */
 	MM_MESSAGE_SEEK_COMPLETED,			/**< Seek completed */
 
 	/* CAMCORDER */
 	MM_MESSAGE_CAMCORDER_STATE_CHANGED = 0x200,	/**< State changed.*/
 	MM_MESSAGE_CAMCORDER_STATE_CHANGED_BY_ASM, 	/**< State change by audio session manager message type */
-	MM_MESSAGE_CAMCORDER_MAX_SIZE,				/**< Maximum size, camcorder waits for user's order (cam_commit/cancel).*/
-	MM_MESSAGE_CAMCORDER_NO_FREE_SPACE,			/**< No free space, camcorder waits for user's order (cam_commit/cancel).*/
-	MM_MESSAGE_CAMCORDER_TIME_LIMIT,			/**< Time limit, camcorder waits for user's order (cam_commit/cancel)*/
-	MM_MESSAGE_CAMCORDER_CAPTURED,				/**< Image/audio/video captured.*/
-	MM_MESSAGE_CAMCORDER_ERROR,					/**< Error occurred.*/
-	MM_MESSAGE_CAMCORDER_FOCUS_CHANGED,			/**< Focus changed */
+	MM_MESSAGE_CAMCORDER_MAX_SIZE,			/**< Maximum size, camcorder waits for user's order (cam_commit/cancel).*/
+	MM_MESSAGE_CAMCORDER_NO_FREE_SPACE,		/**< No free space, camcorder waits for user's order (cam_commit/cancel).*/
+	MM_MESSAGE_CAMCORDER_TIME_LIMIT,		/**< Time limit, camcorder waits for user's order (cam_commit/cancel)*/
+	MM_MESSAGE_CAMCORDER_CAPTURED,			/**< Image/audio/video captured.*/
+	MM_MESSAGE_CAMCORDER_ERROR,			/**< Error occurred.*/
+	MM_MESSAGE_CAMCORDER_FOCUS_CHANGED,		/**< Focus changed */
 	MM_MESSAGE_CAMCORDER_CURRENT_VOLUME,		/**< Current volume level of real input stream */
 	MM_MESSAGE_CAMCORDER_FIRMWARE_UPDATE,		/**< Firmware update */
-	MM_MESSAGE_CAMCORDER_RECORDING_STATUS,			/**< Recording status. (Elapsed time, total time, file size(KB))*/
+	MM_MESSAGE_CAMCORDER_RECORDING_STATUS,		/**< Recording status. (Elapsed time, total time, file size(KB))*/
 	MM_MESSAGE_CAMCORDER_STATE_CHANGED_BY_SECURITY, /**< State change by system security(ex:MDM) message type */
+	MM_MESSAGE_CAMCORDER_VIDEO_SNAPSHOT_CAPTURED,	/**< Image captured while video recording */
 
 	/* RADIO */
 	MM_MESSAGE_RADIO_SCAN_START = 0x300,		/**< Radio frequency scanning initiated */
-	MM_MESSAGE_RADIO_SCAN_INFO,					/**< Founded radio frequency report. check message parameters  */
+	MM_MESSAGE_RADIO_SCAN_INFO,			/**< Founded radio frequency report. check message parameters  */
 	MM_MESSAGE_RADIO_SCAN_FINISH, 			/**< Radio frequency scanning has finished */
-	MM_MESSAGE_RADIO_SCAN_STOP,					/**< Radio frequency scanning has stopped */
+	MM_MESSAGE_RADIO_SCAN_STOP,			/**< Radio frequency scanning has stopped */
 	MM_MESSAGE_RADIO_SEEK_START,			/**< Radio seeking has established */
 	MM_MESSAGE_RADIO_SEEK_FINISH, 			/**< Radio seeking has finished */
-
 
 	/* MEDIA CALL */
 	MM_MESSAGE_MEDIACALL_RESERVED = 0x400,		/**< Reserved message for Media Call */
 
-
 	/* IMAGE */
-	MM_MESSAGE_IMAGE_RESERVED = 0x500,			/**< Reserved message for Media Call */
-
+	MM_MESSAGE_IMAGE_RESERVED = 0x500,		/**< Reserved message for Image */
 
 	/* SOUND */
-	MM_MESSAGE_SOUND_RESERVED = 0x600,			/**< Reserved message for Media Call */
-
+	MM_MESSAGE_SOUND_PCM_CAPTURE_RESTRICTED = 0x600,	/**< Sound pcm capture is restricted by system */
+	MM_MESSAGE_SOUND_PCM_INTERRUPTED,			/**< Sound pcm is interrupted by audio system */
 
 	/* FILE INFO */
-	MM_MESSAGE_FILEINFO_RESERVED = 0x700,		/**< Reserved message for Media Call */
+	MM_MESSAGE_FILEINFO_RESERVED = 0x700,		/**< Reserved message for File Info */
 
-	MM_MESSAGE_NUM,								/**< The number of the messages */
+	MM_MESSAGE_NUM,					/**< The number of the messages */
 };
 
 
@@ -145,6 +142,14 @@ enum MMMessageInterruptedCode {
 	MM_MSG_CODE_INTERRUPTED_BY_RESOURCE_CONFLICT,
 	MM_MSG_CODE_INTERRUPTED_BY_ALARM_START,
 	MM_MSG_CODE_INTERRUPTED_BY_ALARM_END,
+};
+
+/*
+ * Enumerations of code for MM_MESSAGE_SOUND_PCM_CAPTURE_RESTRICTED messages type.
+ */
+enum MMMessagePcmCaptureCode {
+	MM_MSG_CODE_PCM_CAPTURE_RESTRICTED = 0,
+	MM_MSG_CODE_PCM_CAPTURE_ALLOWED,
 };
 
 /**
@@ -248,9 +253,12 @@ typedef struct {
  * Recording status
  */
 		struct {
-			unsigned int		elapsed;		/**< Elapsed time */
-			unsigned int		total;			/**< Total time */
-			unsigned int		filesize;		/**< Recording File size (KB). An approximate value. */
+			unsigned int elapsed;           /**< Elapsed time (ms) */
+			unsigned int total;             /**< Total time */
+			unsigned int filesize;          /**< Recording File size (KB). An approximate value. */
+			unsigned int remained_time;     /**< Remained time (ms).
+			                                     This is available if time limit is not set or
+			                                     time limit is bigger than estimated remained time. */
 		} recording_status;
 
 /**

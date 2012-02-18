@@ -342,6 +342,7 @@ typedef enum {
 	MM_PIXEL_FORMAT_RGBA,           /**< RGBA pixel format */
 	MM_PIXEL_FORMAT_ARGB,           /**< ARGB pixel format */
 	MM_PIXEL_FORMAT_ENCODED,        /**< Encoded pixel format */
+	MM_PIXEL_FORMAT_ITLV_JPEG_UYVY,	/**< FIXME: JPEG+UYVY Interleaved format */
 	MM_PIXEL_FORMAT_NUM		/**< Number of the pixel format */
 } MMPixelFormatType;
 
