@@ -1,10 +1,9 @@
-
 Name:       libmm-common
 Summary:    Multimedia Framework Common Lib
-Version:    0.2.19
-Release:    1
+Version:    0.2.25
+Release:    1.1
 Group:      TO_BE/FILLED_IN
-License:    TO BE FILLED IN
+License:    Apache-2.0
 Source0:    libmm-common-%{version}.tar.gz
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -21,6 +20,7 @@ Multimedia Framework Common Library
 Summary:    Multimedia Framework Common Lib (devel)
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
+Requires:   libmm-common-internal-devel
 
 %description devel
 Multimedia Framework Common Library (devel)
@@ -39,19 +39,14 @@ Multimedia Framework Common Library (devel)
 %prep
 %setup -q 
 
+%build
 ./autogen.sh
 CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " ./configure --prefix=%{_prefix} ; export CFLAGS
-
-%build
-
 
 make %{?jobs:-j%jobs}
 
 %install
-rm -rf %{buildroot}
 %make_install
-
-
 
 
 %post -p /sbin/ldconfig
@@ -63,12 +58,10 @@ rm -rf %{buildroot}
 
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
 
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/mmf/SLP_MultimediaFW_PG.h
 %{_includedir}/mmf/mm_types.h
 %{_includedir}/mmf/mm_error.h
@@ -78,7 +71,6 @@ rm -rf %{buildroot}
 %{_libdir}/libmmfcommon.so
 
 %files internal-devel
-%defattr(-,root,root,-)
 %{_includedir}/mmf/mm_attrs.h
 %{_includedir}/mmf/mm_attrs_private.h
 %{_includedir}/mmf/mm_debug.h
