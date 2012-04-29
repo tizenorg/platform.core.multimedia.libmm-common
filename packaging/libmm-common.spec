@@ -20,32 +20,23 @@ Multimedia Framework Common Library
 Summary:    Multimedia Framework Common Lib (devel)
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
-Requires:   libmm-common-internal-devel
 
 %description devel
 Multimedia Framework Common Library (devel)
 
-
-
-%package internal-devel
-Summary:    Multimedia Framework Common Internal Lib (devel)
-Group:      Development/Libraries
-Requires:   %{name} = %{version}-%{release}
-
-%description internal-devel
-Multimedia Framework Common Library (devel)
-
-
 %prep
-%setup -q 
+%setup -q
 
-%build
 ./autogen.sh
 CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " ./configure --prefix=%{_prefix} ; export CFLAGS
+
+%build
+
 
 make %{?jobs:-j%jobs}
 
 %install
+rm -rf %{buildroot}
 %make_install
 
 
@@ -54,23 +45,20 @@ make %{?jobs:-j%jobs}
 %postun -p /sbin/ldconfig
 
 
-
-
-
 %files
+%defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
 
 
 %files devel
+%defattr(-,root,root,-)
 %{_includedir}/mmf/SLP_MultimediaFW_PG.h
 %{_includedir}/mmf/mm_types.h
 %{_includedir}/mmf/mm_error.h
 %{_includedir}/mmf/mm_message.h
-%{_includedir}/mmf/mm.h
-%{_libdir}/pkgconfig/mm-common.pc
-%{_libdir}/libmmfcommon.so
-
-%files internal-devel
 %{_includedir}/mmf/mm_attrs.h
 %{_includedir}/mmf/mm_attrs_private.h
 %{_includedir}/mmf/mm_debug.h
+%{_includedir}/mmf/mm.h
+%{_libdir}/pkgconfig/mm-common.pc
+%{_libdir}/libmmfcommon.so
