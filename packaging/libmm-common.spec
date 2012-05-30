@@ -5,6 +5,7 @@ Release:    1.1
 Group:      TO_BE/FILLED_IN
 License:    Apache-2.0
 Source0:    libmm-common-%{version}.tar.gz
+Source1001: packaging/libmm-common.manifest 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(glib-2.0)
@@ -31,6 +32,7 @@ Multimedia Framework Common Library (devel)
 CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " ./configure --prefix=%{_prefix} ; export CFLAGS
 
 %build
+cp %{SOURCE1001} .
 
 
 make %{?jobs:-j%jobs}
@@ -46,11 +48,13 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest libmm-common.manifest
 %defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
 
 
 %files devel
+%manifest libmm-common.manifest
 %defattr(-,root,root,-)
 %{_includedir}/mmf/SLP_MultimediaFW_PG.h
 %{_includedir}/mmf/mm_types.h
