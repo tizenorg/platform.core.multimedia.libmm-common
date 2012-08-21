@@ -1,8 +1,0 @@
-@PREFIX@/include/mmf/SLP_MultimediaFW_PG.h
-@PREFIX@/include/mmf/mm.h
-@PREFIX@/include/mmf/mm_message.h
-@PREFIX@/include/mmf/mm_types.h
-@PREFIX@/include/mmf/mm_error.h
-@PREFIX@/lib/*.a
-@PREFIX@/lib/*.la
-@PREFIX@/lib/pkgconfig/*
