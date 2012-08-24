@@ -587,7 +587,9 @@ int mmf_attrs_init(MMHandleType h, mmf_attrs_construct_info_t *info, int count)
 			break;
 		case MMF_VALUE_TYPE_DATA:
 			assert(attrs->items[i].value.value.p_val == NULL);
-			size = sizeof(info[i].default_value)+1;
+			if (info[i].default_value) {
+				size = sizeof(info[i].default_value)+1;
+			}
 			mmf_value_set_data(&attrs->items[i].value, info[i].default_value,size);
 			break;
 		default:
