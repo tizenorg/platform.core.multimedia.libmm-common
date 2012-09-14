@@ -164,6 +164,7 @@ enum MMSoftwareVolumeTableType {
 	MM_SOUND_VOLUME_TYPE_RINGTONE,		/**< Volume table for Ringtone */
 	MM_SOUND_VOLUME_TYPE_MEDIA,			/**< Volume table for Multimedia */
 	MM_SOUND_VOLUME_TYPE_CALL,			/**< Volume table for Call */
+	MM_SOUND_VOLUME_TYPE_EMERGENCY,		/**< Volume table for Emergency (FIXED) */
 	MM_SOUND_VOLUME_TYPE_NUM,
 	MM_SOUND_VOLUME_TABLE_NUM = MM_SOUND_VOLUME_TYPE_NUM,
 };
