@@ -74,6 +74,9 @@ enum MMMessageType {
 	MM_MESSAGE_SEEK_COMPLETED,			/**< Seek completed */
 	MM_MESSAGE_PD_DOWNLOADER_START,	/**< PD downloader start message */
 	MM_MESSAGE_PD_DOWNLOADER_END,		/**< PD downloader end message */
+	MM_MESSAGE_DRM_NO_LICENSE,			/**< No license */
+	MM_MESSAGE_DRM_EXPIRED,				/**< Expired license */
+	MM_MESSAGE_DRM_FUTURE_USE,			/**< License for future use */
 
 	/* CAMCORDER */
 	MM_MESSAGE_CAMCORDER_STATE_CHANGED = 0x200,	/**< State changed.*/

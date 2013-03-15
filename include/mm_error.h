@@ -157,6 +157,10 @@
 #define MM_ERROR_PLAYER_DSP_CRASHED					(MM_ERROR_PLAYER_CLASS | 0x16)		/**< Dsp is crashed */
 #define MM_ERROR_PLAYER_INVALID_STREAM					(MM_ERROR_PLAYER_CLASS | 0x17)		/**< Invalid stream */
 #define MM_ERROR_PLAYER_DOING_SEEK					(MM_ERROR_PLAYER_CLASS | 0x18)		/**< Still seeking */
+#define MM_ERROR_PLAYER_DRM_NO_LICENSE					(MM_ERROR_PLAYER_CLASS | 0x19)		/**< No license */
+#define MM_ERROR_PLAYER_DRM_EXPIRED					(MM_ERROR_PLAYER_CLASS | 0x1a)		/**< Expired license */
+#define MM_ERROR_PLAYER_DRM_FUTURE_USE					(MM_ERROR_PLAYER_CLASS | 0x1b)		/**< License for future use */
+#define MM_ERROR_PLAYER_DRM_NOT_AUTHORIZED				(MM_ERROR_PLAYER_CLASS | 0x1c)          /**< Not authorized */
 
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_AUDIO			(MM_ERROR_PLAYER_CLASS | 0x22)		/**< Unsupported audio  */
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_VIDEO			(MM_ERROR_PLAYER_CLASS | 0x23)		/**< Unsupported video  */
