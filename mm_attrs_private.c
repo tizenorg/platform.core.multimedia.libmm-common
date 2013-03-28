@@ -513,6 +513,12 @@ MMHandleType mmf_attrs_new(int count)
 	attrs->count = count;
 	attrs->items = (mmf_attribute_t *) malloc (sizeof(mmf_attribute_t) * count);
 	memset(attrs->items, 0, sizeof(mmf_attribute_t) * count);
+
+	if (pthread_mutex_init(&attrs->write_lock, NULL) != 0) {
+		mmf_debug(MMF_DEBUG_ERROR, "mutex init failed");
+		return 0;
+	}
+
 	return (MMHandleType) attrs;
 }
 
@@ -554,6 +560,7 @@ void mmf_attrs_free(MMHandleType h)
 			free(attrs->items);
 			attrs->items = NULL;
 		}
+		pthread_mutex_destroy(&attrs->write_lock);
 		free(attrs);
 	}
 }
@@ -618,6 +625,8 @@ int mmf_attrs_commit(MMHandleType h)
 	int i;
 	int ret = 0;
 
+	MM_ATTRS_WRITE_LOCK(attrs);
+
 	for (i = 0; i < attrs->count; ++i) {
 		if (mmf_attribute_is_modified(&attrs->items[i])) {
 			if (attrs->commit_func) {
@@ -636,6 +645,9 @@ int mmf_attrs_commit(MMHandleType h)
 			}
 		}
 	}
+
+	MM_ATTRS_WRITE_UNLOCK(attrs);
+
 	return ret;
 }
 
@@ -646,6 +658,8 @@ int mmf_attrs_commit_err(MMHandleType h, char **err_attr_name)
 	int ret = 0;
 
 	return_val_if_fail(h, -1);
+
+	MM_ATTRS_WRITE_LOCK(attrs);
 
 	for (i = 0; i < attrs->count; ++i) {
 		if (mmf_attribute_is_modified(&attrs->items[i])) {
@@ -671,6 +685,9 @@ int mmf_attrs_commit_err(MMHandleType h, char **err_attr_name)
 			}
 		}
 	}
+
+	MM_ATTRS_WRITE_UNLOCK(attrs);
+
 	return ret;
 }
 

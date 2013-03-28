@@ -20,7 +20,7 @@
  */
 
 
- 
+
 #ifndef __MM_ERROR_H__
 #define __MM_ERROR_H__
 
@@ -161,6 +161,7 @@
 #define MM_ERROR_PLAYER_DRM_EXPIRED					(MM_ERROR_PLAYER_CLASS | 0x1a)		/**< Expired license */
 #define MM_ERROR_PLAYER_DRM_FUTURE_USE					(MM_ERROR_PLAYER_CLASS | 0x1b)		/**< License for future use */
 #define MM_ERROR_PLAYER_DRM_NOT_AUTHORIZED				(MM_ERROR_PLAYER_CLASS | 0x1c)          /**< Not authorized */
+#define MM_ERROR_PLAYER_DRM_OUTPUT_PROTECTION				(MM_ERROR_PLAYER_CLASS | 0x1d)          /**< Output protected */
 
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_AUDIO			(MM_ERROR_PLAYER_CLASS | 0x22)		/**< Unsupported audio  */
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_VIDEO			(MM_ERROR_PLAYER_CLASS | 0x23)		/**< Unsupported video  */

@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <mm_types.h>
 #include <mm_attrs.h>
+#include <pthread.h>
 
 #ifdef __cplusplus
 	extern "C" {
@@ -40,6 +41,9 @@
 		(t) == MMF_VALUE_SPEC_INT_RANGE) || \
 		(t) == MMF_VALUE_SPEC_DOUBLE_ARRAY || \
 		(t) == MMF_VALUE_SPEC_DOUBLE_RANGE)
+
+#define MM_ATTRS_WRITE_LOCK(attrs)		do { pthread_mutex_lock(&attrs->write_lock); } while (0)
+#define MM_ATTRS_WRITE_UNLOCK(attrs)	do { pthread_mutex_unlock(&attrs->write_lock); } while (0)
 
 enum mmf_value_type {
 	MMF_VALUE_TYPE_INT = MM_ATTRS_TYPE_INT,
@@ -126,6 +130,7 @@ struct mmf_attrs {
 	mmf_attribute_t *items;
 	mmf_attrs_commit_func_t commit_func;
 	void *commit_param;
+	pthread_mutex_t write_lock;
 };
 
 struct mmf_attrs_list {

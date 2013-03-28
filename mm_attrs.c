@@ -231,17 +231,22 @@ int mm_attrs_set_string(MMHandleType h, int idx, const char *string, int size)
 
 	return_val_if_fail(item, MM_ERROR_COMMON_INVALID_ARGUMENT);
 
+	MM_ATTRS_WRITE_LOCK(attrs);
 
 	if (mmf_attribute_check_flags(item, MM_ATTRS_FLAG_WRITABLE))
 	{
 		int ret = 0;
 		ret = mmf_attribute_set_string(item, string, size);
 
+		MM_ATTRS_WRITE_UNLOCK(attrs);
+
 		if (ret == 0)
 			return MM_ERROR_NONE;
 		else
 			return MM_ERROR_COMMON_INVALID_ARGUMENT;
 	}
+
+	MM_ATTRS_WRITE_UNLOCK(attrs);
 
 	return MM_ERROR_COMMON_INVALID_PERMISSION;
 }
@@ -252,12 +257,18 @@ int mm_attrs_get_string(MMHandleType h, int idx,char **sval, int *size)
 	mmf_attrs_t *attrs = (mmf_attrs_t *) h;
 	return_val_if_fail(attrs && idx >= 0 && idx < attrs->count && sval, MM_ERROR_COMMON_INVALID_ARGUMENT);
 
+	MM_ATTRS_WRITE_LOCK(attrs);
+
 	if (!(attrs->items[idx].flags & MM_ATTRS_FLAG_READABLE)) {
 		mmf_debug(MMF_DEBUG_LOG, "Access denied.\n");
+		MM_ATTRS_WRITE_UNLOCK(attrs);
 		return MM_ERROR_COMMON_INVALID_PERMISSION;
 	}
 
 	*sval = mmf_value_get_string(&attrs->items[idx].value,size);
+
+	MM_ATTRS_WRITE_UNLOCK(attrs);
+
 	return MM_ERROR_NONE;
 }
 
