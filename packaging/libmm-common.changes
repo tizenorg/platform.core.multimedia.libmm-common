@@ -1,0 +1,4 @@
+* Wed Jun 12 2013 jbollo <jose.bollo@eurogiciel.fr> accepted/tizen/20130520.101133@1714664
+- Adding a changes log file
+- Pointer handle for 64 bits arch
+
