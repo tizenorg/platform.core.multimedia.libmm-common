@@ -37,6 +37,7 @@
 #define	__MM_TYPES_H__
 
 #include <stdbool.h>
+#include <stdint.h>
 
 
 #ifdef __cplusplus
