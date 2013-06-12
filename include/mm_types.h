@@ -59,7 +59,7 @@
 /**
  * Multimedia Framework handle type.
  */
-typedef int MMHandleType;		/**< Handle type */
+typedef intptr_t MMHandleType;		/**< Handle type */
 
 
 /**
