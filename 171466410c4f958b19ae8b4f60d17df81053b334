@@ -1,0 +1,11 @@
+Change-Id: I171466410c4f958b19ae8b4f60d17df81053b334
+Code-Review+2: Anas Nashif <anas.nashif@intel.com>
+Verified+1: Rusty Lynch <rusty.lynch@intel.com>
+Verified+1: José Bollo <jobol@nonadev.net>
+Verified+1: Baptiste DURAND <baptiste.durand@eurogiciel.fr>
+Verified+1: Xavier Roche <xavier.roche@eurogiciel.fr>
+Submitted-by: Anas Nashif <anas.nashif@intel.com>
+Submitted-at: Thu, 13 Jun 2013 06:01:53 -0700
+Reviewed-on: https://review.tizen.org/gerrit/3969
+Project: platform/core/multimedia/libmm-common
+Branch: refs/heads/tizen
