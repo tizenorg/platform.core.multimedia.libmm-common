@@ -1,6 +1,6 @@
 Name:       libmm-common
-Version:    0.2.53
-Release:    3
+Version:    0.2.54
+Release:    0
 Summary:    Multimedia Framework Common Library
 Group:      Multimedia Framework/Libraries
 License:    Apache-2.0

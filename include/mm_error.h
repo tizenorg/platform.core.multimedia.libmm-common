@@ -340,6 +340,8 @@
 #define MM_ERROR_POLICY_INTERNAL		(MM_ERROR_POLICY_CLASS | 0x03)		/**< Internal errors */
 #define MM_ERROR_POLICY_DUPLICATED		(MM_ERROR_POLICY_CLASS | 0x04)		/**< Duplicated Policy Instance */
 #define MM_ERROR_POLICY_RESTRICTED		(MM_ERROR_POLICY_CLASS | 0x05)		/**< Restricted by security system policy */
+#define MM_ERROR_POLICY_BLOCKED_BY_CALL		(MM_ERROR_POLICY_CLASS | 0x06)		/**< Blocked by Audio system policy - CALL */
+#define MM_ERROR_POLICY_BLOCKED_BY_ALARM	(MM_ERROR_POLICY_CLASS | 0x07)		/**< Blocked by Audio system policy - ALARM */
 /**
 	@}
 */
