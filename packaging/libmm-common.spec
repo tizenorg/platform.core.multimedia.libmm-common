@@ -5,6 +5,7 @@ Summary:    Multimedia Framework Common Library
 Group:      Multimedia Framework/Libraries
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
+Source1001: 	libmm-common.manifest
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(mm-log)
 
@@ -21,6 +22,7 @@ Multimedia Framework Common Library (devel)
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 
@@ -38,12 +40,13 @@ make %{?_smp_mflags}
 
 
 %files
-%manifest libmm-common.manifest
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
 
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_includedir}/mmf/SLP_MultimediaFW_PG.h
 %{_includedir}/mmf/mm_types.h
