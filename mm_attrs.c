@@ -418,8 +418,7 @@ int mm_attrs_get_double_by_name(MMHandleType attrs, const char *name, double *va
 
 	mm_attrs_get_index(attrs, name, &idx);
 	if (idx >= 0) {
-		*val = mm_attrs_get_double(attrs, idx, val);
-		return 0;
+		return mm_attrs_get_double(attrs, idx, val);
 	}
 	return MM_ERROR_COMMON_INVALID_ATTRTYPE;
 }

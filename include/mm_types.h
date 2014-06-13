@@ -44,8 +44,8 @@
 #endif
 
 
-#define MM_MAX_FILENAME_LEN	256			/**< Maximum length of the file name */
-#define MM_MAX_URL_LEN		2048	/**< Maximum length of the maximum URL */
+#define MM_MAX_FILENAME_LEN	256	/**< Maximum length of the file name */
+#define MM_MAX_URL_LEN		4096	/**< Maximum length of the file path */
 
 /**
  * @def Defines range of logical volume factor.
@@ -59,7 +59,7 @@
 /**
  * Multimedia Framework handle type.
  */
-typedef void *MMHandleType;		/**< Handle type */
+typedef int MMHandleType;		/**< Handle type */
 
 
 /**

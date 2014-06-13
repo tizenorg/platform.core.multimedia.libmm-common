@@ -169,6 +169,65 @@ enum MMMessagePcmCaptureCode {
  */
 typedef	int	(*MMMessageCallback) (int id, void *param, void *user_param);
 
+/*
+ * Enumerations of subtitle attributes for MM_MESSAGE_UPDATE_SUBTITLE messages type.
+ */
+typedef enum  {
+	/**< region */
+	MM_MSG_SUB_ATTRI_REGION_X_POS = 0,	/**< x position of subtitle region, float type */
+	MM_MSG_SUB_ATTRI_REGION_Y_POS,		/**< y position of subtitle region, float type  */
+	MM_MSG_SUB_ATTRI_REGION_WIDTH,		/**< width of subtitle region, float type  */
+	MM_MSG_SUB_ATTRI_REGION_HEIGHT,	/**< height of subtitle region, float type  */
+	/**< window */
+	MM_MSG_SUB_ATTRI_WINDOW_X_PADDING,	/**< x padding of subtitle window, float type  */
+	MM_MSG_SUB_ATTRI_WINDOW_Y_PADDING,	/**< y padding of subtitle window, float type  */
+	MM_MSG_SUB_ATTRI_WINDOW_L_MARGIN,	/**< left margin of subtitle window, int type  */
+	MM_MSG_SUB_ATTRI_WINDOW_R_MARGIN,	/**< right margin of subtitle window, int type  */
+	MM_MSG_SUB_ATTRI_WINDOW_T_MARGIN,	/**< top margin of subtitle window, int type  */
+	MM_MSG_SUB_ATTRI_WINDOW_B_MARGIN,	/**< bottom margin of subtitle window, int type  */
+	MM_MSG_SUB_ATTRI_WINDOW_BG_COLOR,	/**< background color of subtitle window, int type  */
+	MM_MSG_SUB_ATTRI_WINDOW_OPACITY,	/**< opacity of subtitle window, float type  */
+	MM_MSG_SUB_ATTRI_WINDOW_SHOW_BG,	/**< how to show window background, uint type  */
+	/**< font */
+	MM_MSG_SUB_ATTRI_FONT_FAMILY,	/**< family of subtitle font, char* type  */
+	MM_MSG_SUB_ATTRI_FONT_SIZE,		/**< size of subtitle font, float type  */
+	MM_MSG_SUB_ATTRI_FONT_WEIGHT,	/**< weight of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_STYLE,		/**< style of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_COLOR,		/**< color of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_BG_COLOR,	/**< backgroung color of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_OPACITY,	/**< opacity of subtitle font, float type  */
+	MM_MSG_SUB_ATTRI_FONT_BG_OPACITY,	/**< background opacity of subtitle font, float type  */
+	MM_MSG_SUB_ATTRI_FONT_TOC,		/**< text outline color of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_TOT,		/**< text outline thickness of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_TOBR,		/**< text outline blur radius of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_V_ALIGN,	/**< vertical alignment of subtitle font, int type  */
+	MM_MSG_SUB_ATTRI_FONT_H_ALIGN,	/**< horizontal alignment of subtitle font, int type  */
+} MMMessageSubAttriType;
+
+/**
+ * Subtitle attribute Parameter.
+ */
+typedef struct {
+	MMMessageSubAttriType attri_type;	/**< subtitle attributes type */
+	unsigned int start_pos;	/**< the start position among a subtitle line from where the attribute start to apply */
+	unsigned int stop_pos;	/**< the stop position among a subtitle line at where the attribute stop to apply */
+	union {
+		int _int;
+		unsigned int _uint;
+		float _float;
+		char *_str;
+	};
+} MMSubAttribute;
+
+/**
+ * Subtitle invalid attributes define.
+ */
+#define MM_SUB_ATTRI_INT_INVALID -1
+#define MM_SUB_ATTRI_UINT_INVALID (unsigned int)(-1)
+#define MM_SUB_ATTRI_FLOAT_INVALID 0.0
+#define MM_SUB_ATTRI_STR_INVALID NULL
+
+
 /**
  * Message Parameter.
  */
@@ -252,7 +311,11 @@ typedef struct {
  * subtitle
  */
 		struct {
-			unsigned long duration;         /**< duration */
+			unsigned long timestamp;		/**< timestamp */
+			unsigned long duration;			/**< duration */
+			unsigned int type;			/**< text or picture. the value of type is 0 if it's text, 1 if it's picture. */
+			unsigned int attri_count;		/**< attributes count */
+			MMSubAttribute **attributes;		/**< attributes of MMSubAttribute type. */
 		} subtitle;
 
 /**

@@ -1,8 +1,8 @@
 Name:       libmm-common
-Version:    0.2.54
+Version:    0.2.55
 Release:    0
 Summary:    Multimedia Framework Common Library
-Group:      Multimedia Framework/Libraries
+Group:      Multimedia/Libraries
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
 Source1001: 	libmm-common.manifest
@@ -32,6 +32,8 @@ make %{?_smp_mflags}
 
 %install
 %make_install
+mkdir -p %{buildroot}/usr/share/license
+cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
 
 
 %post -p /sbin/ldconfig
@@ -43,6 +45,7 @@ make %{?_smp_mflags}
 %manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
+/usr/share/license/%{name}
 
 
 %files devel
