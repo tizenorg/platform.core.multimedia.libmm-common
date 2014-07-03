@@ -25,13 +25,13 @@ Multimedia Framework Common Library (devel) package.
 cp %{SOURCE1001} .
 
 %build
-CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " %reconfigure
+
+CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" "
+%reconfigure
 %__make %{?_smp_mflags}
 
 %install
 %make_install
-mkdir -p %{buildroot}/usr/share/license
-cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
 
 %post -p /sbin/ldconfig
 
@@ -41,7 +41,7 @@ cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
 %manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_libdir}/libmmfcommon.so.*
-/usr/share/license/%{name}
+%license LICENSE.APLv2
 
 %files devel
 %manifest %{name}.manifest
