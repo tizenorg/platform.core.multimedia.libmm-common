@@ -2,10 +2,10 @@ Name:       libmm-common
 Version:    0.2.54
 Release:    0
 Summary:    Multimedia Framework Common Library
-Group:      Multimedia Framework/Libraries
+Group:      Multimedia/Framework
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
-Source1001: 	libmm-common.manifest
+Source1001:     libmm-common.manifest
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(mm-log)
 
@@ -26,9 +26,9 @@ cp %{SOURCE1001} .
 
 %build
 
-./autogen.sh
-CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " %configure
-make %{?_smp_mflags}
+CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" "
+%reconfigure
+%__make %{?_smp_mflags}
 
 %install
 %make_install
