@@ -510,12 +510,17 @@ MMHandleType mmf_attrs_new(int count)
 	return_val_if_fail(count > 0, 0);
 	mmf_attrs_t *attrs;
 	attrs = (mmf_attrs_t *) malloc (sizeof(mmf_attrs_t));
+	// Check for allocation failure
+	if (attrs == NULL)
+		return 0 ;
 	attrs->count = count;
 	attrs->items = (mmf_attribute_t *) malloc (sizeof(mmf_attribute_t) * count);
 	memset(attrs->items, 0, sizeof(mmf_attribute_t) * count);
 
 	if (pthread_mutex_init(&attrs->write_lock, NULL) != 0) {
 		mmf_debug(MMF_DEBUG_ERROR, "mutex init failed");
+		// Release memory before returning
+		free (attrs);
 		return 0;
 	}
 
