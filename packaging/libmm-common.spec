@@ -16,7 +16,7 @@ Multimedia Framework Common Library package.
 %package devel
 Summary:    Multimedia Framework Common Lib (devel)
 Group:      Development/Libraries
-Requires:   %{name} = %{version}
+Requires:   %{name} = %{version}-%{release}
 
 %description devel
 Multimedia Framework Common Library (devel) package.
