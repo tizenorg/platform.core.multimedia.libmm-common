@@ -3611,9 +3611,9 @@ int err;
 
 
 
-// Init session policy to SHARE 
+// Init session policy to MEDIA
 
-err = mm_session_init (MM_SESSION_TYPE_SHARE);
+err = mm_session_init (MM_SESSION_TYPE_MEDIA);
 
 
 
@@ -3646,9 +3646,9 @@ int err;
 
 
 
-// Init session policy to SHARE
+// Init session policy to MEDIA
 
-err = mm_session_init (MM_SESSION_TYPE_SHARE);
+err = mm_session_init (MM_SESSION_TYPE_MEDIA);
 
  
 

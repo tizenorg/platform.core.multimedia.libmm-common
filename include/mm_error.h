@@ -46,6 +46,7 @@
 #define MM_ERROR_RADIO_CLASS			0x80000300		/**< Category for describing radio error group */
 #define MM_ERROR_PLAYER_CLASS			0x80000400		/**< Category for describing player error group */
 #define MM_ERROR_FILE_CLASS			0x80000600		/**< Category for describing file error group */
+#define MM_ERROR_STREAMRECORDER_CLASS		0x80000700      /**< Category for describing streamrecorder error group */
 #define MM_ERROR_CAMCORDER_CLASS		0x80000800		/**< Category for describing camcorder error group */
 #define MM_ERROR_WFD_CLASS		0x80000900		/**< Category for describing wifi-display error group */
 #define MM_ERROR_IMAGE_CLASS			0x80000a00		/**< Category for describing image error group */
@@ -94,7 +95,9 @@
 #define MM_ERROR_SOUND_END_OF_STREAM			(MM_ERROR_SOUND_CLASS | 0x07)		/**< End of stream */
 #define MM_ERROR_SOUND_SEEK				(MM_ERROR_SOUND_CLASS | 0x08)		/**< Seek related errors */
 #define MM_ERROR_SOUND_INVALID_POINTER			(MM_ERROR_SOUND_CLASS | 0x09)		/**< Invalid pointer */
+#define MM_ERROR_SOUND_PERMISSION_DENIED		(MM_ERROR_SOUND_CLASS | 0x0a)		/**< Permission Denied */
 #define MM_ERROR_SOUND_NOT_SUPPORTED_OPERATION		(MM_ERROR_SOUND_CLASS | 0x10)		/**< Not supported operation */
+#define MM_ERROR_SOUND_NO_DATA				(MM_ERROR_SOUND_CLASS | 0x11)		/**< No data */
 
 #define MM_ERROR_SOUND_INVALID_FILE			(MM_ERROR_SOUND_CLASS | 0x21)		/**< Invalid file */
 #define MM_ERROR_SOUND_INVALID_PATH			(MM_ERROR_SOUND_CLASS | 0x22)		/**< Invalid path */
@@ -102,6 +105,7 @@
 #define MM_ERROR_SOUND_UNSUPPORTED_MEDIA_TYPE		(MM_ERROR_SOUND_CLASS | 0x24)		/**< Invalid media type */
 #define MM_ERROR_SOUND_INTERNAL				(MM_ERROR_SOUND_CLASS | 0x25)		/**< Internal errors */
 #define MM_ERROR_SOUND_INVALID_STATE			(MM_ERROR_SOUND_CLASS | 0x26)		/**< Invalid state */
+#define MM_ERROR_SOUND_VOLUME_BLOCKED_BY_SAFETY	(MM_ERROR_SOUND_CLASS | 0x27) /**< Set volume fail dueto safety volume popup */
 
 #define MM_ERROR_SOUND_VOLUME_NO_INSTANCE		(MM_ERROR_SOUND_CLASS | 0x31)		/**< No active instance */
 #define MM_ERROR_SOUND_VOLUME_CAPTURE_ONLY		(MM_ERROR_SOUND_CLASS | 0x32)		/**< Capture instance only */
@@ -162,6 +166,8 @@
 #define MM_ERROR_PLAYER_DRM_FUTURE_USE					(MM_ERROR_PLAYER_CLASS | 0x1b)		/**< License for future use */
 #define MM_ERROR_PLAYER_DRM_NOT_AUTHORIZED				(MM_ERROR_PLAYER_CLASS | 0x1c)          /**< Not authorized */
 #define MM_ERROR_PLAYER_DRM_OUTPUT_PROTECTION				(MM_ERROR_PLAYER_CLASS | 0x1d)          /**< Output protected */
+#define MM_ERROR_PLAYER_RESOURCE_LIMIT					(MM_ERROR_PLAYER_CLASS | 0x1e)          /**< Resource limit */
+#define MM_ERROR_PLAYER_PERMISSION_DENIED					(MM_ERROR_PLAYER_CLASS | 0x1f)          /**< Permission denied */
 
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_AUDIO			(MM_ERROR_PLAYER_CLASS | 0x22)		/**< Unsupported audio  */
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_VIDEO			(MM_ERROR_PLAYER_CLASS | 0x23)		/**< Unsupported video  */
@@ -261,6 +267,40 @@
 #define MM_ERROR_CAMCORDER_MNOTE_MALLOC			(MM_ERROR_CAMCORDER_CLASS | 0x27)		/**< Memory allocation for makernote entries failed */
 #define MM_ERROR_CAMCORDER_MNOTE_ADD_ENTRY		(MM_ERROR_CAMCORDER_CLASS | 0x28)		/**< Adding a makernote entry to list failed */
 
+/*
+	MM_ERROR_STREAMRECORDER_CLASS
+*/
+#define MM_ERROR_STREAMRECORDER_DEVICE			    (MM_ERROR_STREAMRECORDER_CLASS | 0x01)		/**< General error of streamrecorder device */
+
+#define MM_ERROR_STREAMRECORDER_GST_CORE			(MM_ERROR_STREAMRECORDER_CLASS | 0x0a)		/**< Gst Core error */
+#define MM_ERROR_STREAMRECORDER_GST_LIBRARY			(MM_ERROR_STREAMRECORDER_CLASS | 0x0b)		/**< Gst library error */
+#define MM_ERROR_STREAMRECORDER_GST_RESOURCE			(MM_ERROR_STREAMRECORDER_CLASS | 0x0c)		/**< Gst resource error */
+#define MM_ERROR_STREAMRECORDER_GST_STREAM			(MM_ERROR_STREAMRECORDER_CLASS | 0x0d)		/**< Gst stream error */
+#define MM_ERROR_STREAMRECORDER_GST_STATECHANGE		(MM_ERROR_STREAMRECORDER_CLASS | 0x0e)		/**< Gst state change failed */
+#define MM_ERROR_STREAMRECORDER_GST_NEGOTIATION		(MM_ERROR_STREAMRECORDER_CLASS | 0x0f)		/**< Gst negotiation failed */
+#define MM_ERROR_STREAMRECORDER_GST_LINK			(MM_ERROR_STREAMRECORDER_CLASS | 0x10)		/**< Gst linking failed */
+#define MM_ERROR_STREAMRECORDER_GST_FLOW_ERROR		(MM_ERROR_STREAMRECORDER_CLASS | 0x11)		/**< Gst linking failed */
+
+#define MM_ERROR_STREAMRECORDER_ENCODER			(MM_ERROR_STREAMRECORDER_CLASS | 0x12)		/**< General error of Encoder */
+#define MM_ERROR_STREAMRECORDER_ENCODER_BUFFER		(MM_ERROR_STREAMRECORDER_CLASS | 0x13)		/**< Encoder buffer error */
+#define MM_ERROR_STREAMRECORDER_ENCODER_WRONG_TYPE		(MM_ERROR_STREAMRECORDER_CLASS | 0x14)		/**< Encoder wrong type (format or param) */
+#define MM_ERROR_STREAMRECORDER_ENCODER_WORKING		(MM_ERROR_STREAMRECORDER_CLASS | 0x15)		/**< Encoding fail */
+
+#define MM_ERROR_STREAMRECORDER_INVALID_CONDITION		(MM_ERROR_STREAMRECORDER_CLASS | 0x16)		/**< Invalid pre-condition */
+
+#define MM_ERROR_STREAMRECORDER_INVALID_ARGUMENT		(MM_ERROR_STREAMRECORDER_CLASS | 0x18)		/**< Invalid Argument */
+
+#define MM_ERROR_STREAMRECORDER_RESPONSE_TIMEOUT		(MM_ERROR_STREAMRECORDER_CLASS | 0x1b)		/**< Not responsed in time */
+#define MM_ERROR_STREAMRECORDER_NOT_INITIALIZED		(MM_ERROR_STREAMRECORDER_CLASS | 0x1c)		/**< Not initialized streamrecorder */
+#define MM_ERROR_STREAMRECORDER_LOW_MEMORY			(MM_ERROR_STREAMRECORDER_CLASS | 0x1d)		/**< Memory alloc failed */
+#define MM_ERROR_STREAMRECORDER_RESOURCE_CREATION		(MM_ERROR_STREAMRECORDER_CLASS | 0x1e)		/**< Creating resource of streamrecorder failed */
+#define MM_ERROR_STREAMRECORDER_CMD_IS_RUNNING		(MM_ERROR_STREAMRECORDER_CLASS | 0x1f)		/**< Command is running now */
+
+#define MM_ERROR_STREAMRECORDER_FILE_SIZE_OVER		(MM_ERROR_STREAMRECORDER_CLASS | 0x23)		/**< File size is greater than max size */
+
+#define MM_ERROR_STREAMRECORDER_AUDIOBUFFER_PUSH	(MM_ERROR_STREAMRECORDER_CLASS | 0x26)		/**< Exif makernote data construction failed */
+#define MM_ERROR_STREAMRECORDER_VIDEOBUFFER_PUSH	(MM_ERROR_STREAMRECORDER_CLASS | 0x27)		/**< Memory allocation for makernote entries failed */
+#define MM_ERROR_STREAMRECORDER_BUFFER_CONVERT		(MM_ERROR_STREAMRECORDER_CLASS | 0x28)		/**< Adding a makernote entry to list failed */
 
 /*
 	MM_ERROR_WFD_CLASS
@@ -271,6 +311,7 @@
 #define MM_ERROR_WFD_NO_OP				(MM_ERROR_WFD_CLASS | 0x04)		/**< No operation */
 #define MM_ERROR_WFD_INVALID_STATE			(MM_ERROR_WFD_CLASS | 0x05)		/**< Invalid state */
 #define MM_ERROR_WFD_INTERNAL				(MM_ERROR_WFD_CLASS | 0x06)		/**< Internal errors */
+#define MM_ERROR_WFD_NOHDCPKEY				(MM_ERROR_WFD_CLASS | 0x07)		/**< No HDCP key */
 
 
 /*
@@ -291,7 +332,7 @@
 #define MM_ERROR_TRANSCODE_FILEOPEN					(MM_ERROR_TRANSCODE_CLASS | 1)		/**< Cannot open file */
 #define MM_ERROR_TRANSCODE_INTERNAL					(MM_ERROR_TRANSCODE_CLASS | 2)		/**< Transcode internal error */
 #define MM_ERROR_TRANSCODE_NOT_INITIALIZED			(MM_ERROR_TRANSCODE_CLASS | 3)		/**< Fail to open transcode device */
-#define MM_ERROR_TRANSCODENO_DECODED_DATA			(MM_ERROR_TRANSCODE_CLASS | 4)		/**< Fail to control transcode device */
+#define MM_ERROR_TRANSCODE_NO_DECODED_DATA			(MM_ERROR_TRANSCODE_CLASS | 4)		/**< Fail to control transcode device */
 #define MM_ERROR_TRANSCODE_NO_FREE_SPACE			(MM_ERROR_TRANSCODE_CLASS | 5)		/**< Not enough memory */
 #define MM_ERROR_TRANSCODE_INVALID_VALUE			(MM_ERROR_TRANSCODE_CLASS | 0x22)	/**< Invalid value */
 #define MM_ERROR_TRANSCODE_NOT_SUPPORT_FORMAT		(MM_ERROR_TRANSCODE_CLASS | 0x23)	/**< Not supported transcode format */

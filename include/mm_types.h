@@ -18,7 +18,7 @@
  * limitations under the License.
  *
  */
- 
+
 /**
  * This file declares common data structure of multimedia framework.
  *
@@ -44,8 +44,8 @@
 #endif
 
 
-#define MM_MAX_FILENAME_LEN	256	/**< Maximum length of the file name */
-#define MM_MAX_URL_LEN		4096	/**< Maximum length of the file path */
+#define MM_MAX_FILENAME_LEN	256			/**< Maximum length of the file name */
+#define MM_MAX_URL_LEN		2048	/**< Maximum length of the maximum URL */
 
 /**
  * @def Defines range of logical volume factor.
@@ -59,7 +59,7 @@
 /**
  * Multimedia Framework handle type.
  */
-typedef void *MMHandleType;		/**< Handle type */
+typedef int MMHandleType;		/**< Handle type */
 
 
 /**
@@ -69,6 +69,7 @@ enum MMVideoDeviceType {
 	MM_VIDEO_DEVICE_NONE = -1,	/**< No camera */
 	MM_VIDEO_DEVICE_CAMERA0,	/**< Primary camera */
 	MM_VIDEO_DEVICE_CAMERA1,	/**< Secondary camera */
+	MM_VIDEO_DEVICE_CAMERAPLEX, /**< Primary camera + Secondary camera */
 	MM_VIDEO_DEVICE_NUM,		/**< Number of video capture devices */
 };
 
@@ -78,6 +79,7 @@ enum MMVideoDeviceType {
 enum MMAudioDeviceType {
 	MM_AUDIO_DEVICE_MIC,	/**< Mic device */
 	MM_AUDIO_DEVICE_MODEM,	/**< Modem */
+	MM_AUDIO_DEVICE_RADIO,	/**< Radio */
 	MM_AUDIO_DEVICE_NUM,	/**< Number of audio capture devices */
 };
 
@@ -166,6 +168,8 @@ enum MMSoftwareVolumeTableType {
 	MM_SOUND_VOLUME_TYPE_MEDIA,			/**< Volume table for Multimedia */
 	MM_SOUND_VOLUME_TYPE_CALL,			/**< Volume table for Call */
 	MM_SOUND_VOLUME_TYPE_VOIP,			/**< Volume table for VOIP */
+	MM_SOUND_VOLUME_TYPE_VOICE,			/**< Volume table for VOICE */
+	MM_SOUND_VOLUME_TYPE_SVOICE,			/**< Volume table for SVOICE */
 	MM_SOUND_VOLUME_TYPE_EMERGENCY,		/**< Volume table for Emergency (FIXED) */
 	MM_SOUND_VOLUME_TYPE_NUM,
 	MM_SOUND_VOLUME_TABLE_NUM = MM_SOUND_VOLUME_TYPE_NUM,
@@ -185,7 +189,7 @@ enum MMSoftwareVolumeGainType {
 	MM_SOUND_VOLUME_GAIN_MIDI		= 7<<8,		/**< Volume gain for Midi */
 	MM_SOUND_VOLUME_GAIN_BOOTING	= 8<<8,		/**< Volume gain for Booting */
 	MM_SOUND_VOLUME_GAIN_VIDEO		= 9<<8,		/**< Volume gain for Video */
-	MM_SOUND_VOLUME_GAIN_VIDEO_HDMI	= 10<<8,	/**< Volume gain for Video HDMI */
+	MM_SOUND_VOLUME_GAIN_TTS		= 10<<8,	/**< Volume gain for TTS */
 	MM_SOUND_VOLUME_GAIN_NUM
 };
 
@@ -484,6 +488,14 @@ typedef enum  {
 	MM_DISPLAY_METHOD_ORIGIN_OR_LETTER,
 	MM_DISPLAY_METHOD_CUSTOM_ROI,
 }MMDisplayGeometryMethod;
+
+/*
+ * Enumerations of ROI mode of display geometry method
+ */
+typedef enum  {
+	MM_DISPLAY_METHOD_CUSTOM_ROI_FULL_SCREEN = 0,
+	MM_DISPLAY_METHOD_CUSTOM_ROI_LETER_BOX
+}MMDisplayGeometryMethodRoiMode;
 
 #ifdef __cplusplus
 	}

@@ -20,7 +20,7 @@
  */
 
 
- 
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <malloc.h>
@@ -134,7 +134,7 @@ int mm_attrs_set_int(MMHandleType h, int idx, int val)
 	{
 		return MM_ERROR_COMMON_INVALID_PERMISSION;
 	}
-	
+
 	if (mmf_attribute_validate_int(item, val))
 	{
 		int ret = 0;
@@ -151,7 +151,7 @@ int mm_attrs_set_int(MMHandleType h, int idx, int val)
 	else if (item->value_spec.type == MMF_VALUE_SPEC_INT_ARRAY)
 		return MM_ERROR_COMMON_OUT_OF_ARRAY;
 	else
-		return MM_ERROR_COMMON_INVALID_ARGUMENT;		
+		return MM_ERROR_COMMON_INVALID_ARGUMENT;
 }
 
 
@@ -184,7 +184,7 @@ int mm_attrs_set_double(MMHandleType h, int idx, double val)
 	{
 		return MM_ERROR_COMMON_INVALID_PERMISSION;
 	}
-	
+
 	if (mmf_attribute_validate_double(item, val))
 	{
 		int ret = 0;
@@ -201,7 +201,7 @@ int mm_attrs_set_double(MMHandleType h, int idx, double val)
 	else if (item->value_spec.type == MMF_VALUE_SPEC_DOUBLE_ARRAY)
 		return MM_ERROR_COMMON_OUT_OF_ARRAY;
 	else
-		return MM_ERROR_COMMON_INVALID_ARGUMENT;	
+		return MM_ERROR_COMMON_INVALID_ARGUMENT;
 }
 
 
@@ -260,7 +260,7 @@ int mm_attrs_get_string(MMHandleType h, int idx,char **sval, int *size)
 	MM_ATTRS_WRITE_LOCK(attrs);
 
 	if (!(attrs->items[idx].flags & MM_ATTRS_FLAG_READABLE)) {
-		mmf_debug(MMF_DEBUG_LOG, "Access denied.\n");
+		//mmf_debug(MMF_DEBUG_LOG, "Access denied.\n");
 		MM_ATTRS_WRITE_UNLOCK(attrs);
 		return MM_ERROR_COMMON_INVALID_PERMISSION;
 	}
@@ -302,7 +302,7 @@ int mm_attrs_get_data(MMHandleType h, int idx,void **data,  int *size)
 	return_val_if_fail(attrs && idx >= 0 && idx < attrs->count && data, MM_ERROR_COMMON_INVALID_ARGUMENT);
 
 	if (!(attrs->items[idx].flags & MM_ATTRS_FLAG_READABLE)) {
-		mmf_debug(MMF_DEBUG_LOG, "Access denied.\n");
+		//mmf_debug(MMF_DEBUG_LOG, "Access denied.\n");
 		return MM_ERROR_COMMON_INVALID_PERMISSION;
 	}
 	*data=mmf_value_get_data(&attrs->items[idx].value,size);
@@ -349,7 +349,7 @@ int mm_attrs_set_string_by_name(MMHandleType attrs, const char *name, const char
 			string = NULL;
 			size = 0;
 		}
-		
+
 		return mm_attrs_set_string(attrs, idx, string, size);
 	}
 	return -1;
@@ -418,7 +418,8 @@ int mm_attrs_get_double_by_name(MMHandleType attrs, const char *name, double *va
 
 	mm_attrs_get_index(attrs, name, &idx);
 	if (idx >= 0) {
-		return mm_attrs_get_double(attrs, idx, val);
+		*val = mm_attrs_get_double(attrs, idx, val);
+		return 0;
 	}
 	return MM_ERROR_COMMON_INVALID_ATTRTYPE;
 }
@@ -448,10 +449,13 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			if (err_attr_name)
 				*err_attr_name = strdup(name);
 
-			if (ret == MM_ERROR_COMMON_OUT_OF_ARRAY)	//to avoid confusing
+			if (ret == MM_ERROR_COMMON_OUT_OF_ARRAY) {	//to avoid confusing
+				//mmf_debug(MMF_DEBUG_ERROR, "result of mm_attrs_get_index is MM_ERROR_COMMON_OUT_OF_ARRAY so return(ret = %x, name:%s)",ret, name);
 				return MM_ERROR_COMMON_ATTR_NOT_EXIST;
-			else
+			} else {
+				//mmf_debug(MMF_DEBUG_ERROR, "result of mm_attrs_get_index is %x so return(name:%s)",ret, name);
 				return ret;
+			}
 		}
 
 		//type check
@@ -464,14 +468,14 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			case MM_ATTRS_TYPE_INT:
 			{
 				int val = 	va_arg ((var_args), int);
-				mmf_debug(MMF_DEBUG_LOG, "(%s: %d)\n", name, val);
+//				mmf_debug(MMF_DEBUG_LOG, "(%s: %d)\n", name, val);
 				ret = mm_attrs_set_int(attrs, idx, val);
 				break;
 			}
 			case MM_ATTRS_TYPE_DOUBLE:
 			{
 				double val = va_arg ((var_args), double);
-				mmf_debug(MMF_DEBUG_LOG, "(%s: %f)\n", name, val);
+//				mmf_debug(MMF_DEBUG_LOG, "(%s: %f)\n", name, val);
 				ret = mm_attrs_set_double(attrs, idx, val);
 				break;
 			}
@@ -479,7 +483,7 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			{
 				char * val = va_arg ((var_args), char*);
 				int size = va_arg ((var_args), int);
-				mmf_debug(MMF_DEBUG_LOG, "(%s: \'%s\', size: %d)\n", name, val, size);
+//				mmf_debug(MMF_DEBUG_LOG, "(%s: \'%s\', size: %d)\n", name, val, size);
 				ret = mm_attrs_set_string(attrs, idx, (const char*)val, size);
 				break;
 			}
@@ -487,23 +491,22 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			{
 				void * val = va_arg ((var_args), void*);
 				int size = va_arg ((var_args), int);
-				mmf_debug(MMF_DEBUG_LOG, "(%s: %p, size: %d)\n", name, val, size);
+//				mmf_debug(MMF_DEBUG_LOG, "(%s: %p, size: %d)\n", name, val, size);
 				ret = mm_attrs_set_data(attrs, idx, val, size);
 				break;
 			}
 			case MM_ATTRS_TYPE_INVALID:
 			default:
-				mmf_debug(MMF_DEBUG_ERROR, "This function doesn't support attribute type(%d, name:%s)\n", attr_type, name);
-				if (err_attr_name)
-					*err_attr_name = strdup(name);
-				ret =  MM_ERROR_COMMON_INVALID_ARGUMENT;
+				//mmf_debug(MMF_DEBUG_ERROR, "This function doesn't support attribute type(%d, name:%s)\n", attr_type, name);
+				return MM_ERROR_COMMON_INVALID_ARGUMENT;
+				break;
 		}
 
 		if (ret != MM_ERROR_NONE)
 		{
 			if (err_attr_name)
 				*err_attr_name = strdup(name);
-			mmf_debug(MMF_DEBUG_ERROR, "Setting failure.(name:%s)\n", name);
+			//mmf_debug(MMF_DEBUG_ERROR, "Setting failure.(name:%s)\n", name);
 			return ret;
 		}
 
@@ -511,8 +514,10 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 		name = va_arg (var_args, char*);
 	}
 
-	if (mmf_attrs_commit_err(attrs, err_attr_name) == -1)
+	if (mmf_attrs_commit_err(attrs, err_attr_name) == -1) {
+		//mmf_debug(MMF_DEBUG_ERROR, "result of mmf_attrs_commit_err is -1 (name:%s)", name);
 		return MM_ERROR_CAMCORDER_INVALID_ARGUMENT;
+	}
 	else
 		return MM_ERROR_NONE;
 
@@ -590,8 +595,8 @@ int mm_attrs_get_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			case MM_ATTRS_TYPE_INVALID:
 			default:
 //				mmf_debug(MMF_DEBUG_ERROR, "This function doesn't support attribute type(%d, name:%s)\n", attr_type, name);
-				if (err_attr_name)
-					*err_attr_name = strdup(name);
+				//if (err_attr_name)
+				//	*err_attr_name = strdup(name);
 				ret =  MM_ERROR_COMMON_INVALID_ARGUMENT;
 		}
 
@@ -599,7 +604,7 @@ int mm_attrs_get_valist (MMHandleType attrs, char **err_attr_name, const char *a
 		{
 			if (err_attr_name)
 				*err_attr_name = strdup(name);
-			mmf_debug(MMF_DEBUG_ERROR, "Setting failure.(name:%s)\n", name);
+			//mmf_debug(MMF_DEBUG_ERROR, "Setting failure.(name:%s)\n", name);
 			return ret;
 		}
 
@@ -678,7 +683,7 @@ int mm_attrs_get_info(MMHandleType h, int idx, MMAttrsInfo *info)
 			info->double_range.dval = attrs->items[idx].value_spec.spec.double_spec.range.dval;
 		break;
 		case MM_ATTRS_VALID_TYPE_NONE:
-			mmf_debug(MMF_DEBUG_LOG, "Valid type none.\n");
+			//mmf_debug(MMF_DEBUG_LOG, "Valid type none.\n");
 		break;
 		case MM_ATTRS_VALID_TYPE_INVALID:
 		default:
@@ -697,7 +702,7 @@ int mm_attrs_get_info_by_name(MMHandleType h, const char *attr_name, MMAttrsInfo
 	return_val_if_fail(h, MM_ERROR_COMMON_INVALID_ARGUMENT);
 	return_val_if_fail(info, MM_ERROR_COMMON_INVALID_ARGUMENT);
 
-	mmf_debug(MMF_DEBUG_LOG, "(attr_name:%s)\n", attr_name);
+	//mmf_debug(MMF_DEBUG_LOG, "(attr_name:%s)\n", attr_name);
 
 	mm_attrs_get_index(h, attr_name, &idx);
 

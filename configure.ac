@@ -7,10 +7,9 @@ AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 # Checks for programs.
-m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_CC
+AM_PROG_AR
 AC_PROG_LIBTOOL
-
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lpthread':
 AC_CHECK_LIB([pthread], [main])

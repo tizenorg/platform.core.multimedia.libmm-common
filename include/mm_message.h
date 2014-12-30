@@ -19,7 +19,7 @@
  *
  */
 
- 
+
 #ifndef __MM_MESSAGE_H__
 #define	__MM_MESSAGE_H__
 
@@ -74,6 +74,7 @@ enum MMMessageType {
 	MM_MESSAGE_SEEK_COMPLETED,			/**< Seek completed */
 	MM_MESSAGE_PD_DOWNLOADER_START,	/**< PD downloader start message */
 	MM_MESSAGE_PD_DOWNLOADER_END,		/**< PD downloader end message */
+	MM_MESSAGE_IMAGE_BUFFER,        /**< hls image buffer message type */
 	MM_MESSAGE_DRM_NO_LICENSE,			/**< No license */
 	MM_MESSAGE_DRM_EXPIRED,				/**< Expired license */
 	MM_MESSAGE_DRM_FUTURE_USE,			/**< License for future use */
@@ -96,14 +97,21 @@ enum MMMessageType {
 	MM_MESSAGE_CAMCORDER_FACE_DETECT_INFO,		/**< Face detection information */
 	MM_MESSAGE_CAMCORDER_VIDEO_CAPTURED,		/**< Video captured */
 	MM_MESSAGE_CAMCORDER_AUDIO_CAPTURED,		/**< Audio captured */
+	MM_MESSAGE_CAMCORDER_LOW_LIGHT_STATE,		/**< Low light state */
+	MM_MESSAGE_CAMCORDER_CAPTURE_SOUND,		/**< Noti to play capture sound - only single capture available */
+	MM_MESSAGE_CAMCORDER_CAPTURE_SOUND_COMPLETED,	/**< Noti to play capture sound completed - only single capture available */
 
 	/* RADIO */
 	MM_MESSAGE_RADIO_SCAN_START = 0x300,		/**< Radio frequency scanning initiated */
 	MM_MESSAGE_RADIO_SCAN_INFO,			/**< Founded radio frequency report. check message parameters  */
-	MM_MESSAGE_RADIO_SCAN_FINISH, 			/**< Radio frequency scanning has finished */
+	MM_MESSAGE_RADIO_SCAN_FINISH,			/**< Radio frequency scanning has finished */
 	MM_MESSAGE_RADIO_SCAN_STOP,			/**< Radio frequency scanning has stopped */
 	MM_MESSAGE_RADIO_SEEK_START,			/**< Radio seeking has established */
-	MM_MESSAGE_RADIO_SEEK_FINISH, 			/**< Radio seeking has finished */
+	MM_MESSAGE_RADIO_SEEK_FINISH,			/**< Radio seeking has finished */
+	MM_MESSAGE_RADIO_SET_FREQUENCY,			/**< Radio set frequency async*/
+	MM_MESSAGE_RADIO_RDS_PS,			/**< Radio RDS Program Service Data has arrived> */
+	MM_MESSAGE_RADIO_RDS_RT,			/**< Radio RDS Radio Text Data has arrived> */
+
 
 	/* MEDIA CALL */
 	MM_MESSAGE_MEDIACALL_RESERVED = 0x400,		/**< Reserved message for Media Call */
@@ -117,6 +125,11 @@ enum MMMessageType {
 
 	/* FILE INFO */
 	MM_MESSAGE_FILEINFO_RESERVED = 0x700,		/**< Reserved message for File Info */
+
+	/* STREAM RECORDER */
+	MM_MESSAGE_STREAMRECORDER_ERROR 			= 0x800,
+	MM_MESSAGE_STREAMRECORDER_CONSUME_COMPLETE,
+	MM_MESSAGE_STREAMRECORDER_STATE_CHANGED,
 
 	MM_MESSAGE_NUM,					/**< The number of the messages */
 };
@@ -138,6 +151,7 @@ enum MMMessageUnionType {
 	MM_MSG_UNION_RADIO_SCAN,
 	MM_MSG_UNION_RECORDING_STATUS,
 	MM_MSG_UNION_REC_VOLUME_DB,
+	MM_MSG_UNION_CONSUME_RECORDER_BUFFER,
 };
 
 /*
@@ -146,6 +160,7 @@ enum MMMessageUnionType {
 enum MMMessageInterruptedCode {
 	MM_MSG_CODE_INTERRUPTED_BY_MEDIA = 0,
 	MM_MSG_CODE_INTERRUPTED_BY_CALL_START,
+	MM_MSG_CODE_INTERRUPTED_BY_CALL_END,
 	MM_MSG_CODE_INTERRUPTED_BY_EARJACK_UNPLUG,
 	MM_MSG_CODE_INTERRUPTED_BY_RESOURCE_CONFLICT,
 	MM_MSG_CODE_INTERRUPTED_BY_ALARM_START,
@@ -154,6 +169,9 @@ enum MMMessageInterruptedCode {
 	MM_MSG_CODE_INTERRUPTED_BY_EMERGENCY_END,
 	MM_MSG_CODE_INTERRUPTED_BY_OTHER_PLAYER_APP,
 	MM_MSG_CODE_INTERRUPTED_BY_RESUMABLE_MEDIA,
+	MM_MSG_CODE_INTERRUPTED_BY_NOTIFICATION_START,
+	MM_MSG_CODE_INTERRUPTED_BY_NOTIFICATION_END,
+	MM_MSG_CODE_INTERRUPTED_BY_RESUMABLE_CANCELED,
 };
 
 /*
@@ -168,65 +186,6 @@ enum MMMessagePcmCaptureCode {
  * Message callback function type.
  */
 typedef	int	(*MMMessageCallback) (int id, void *param, void *user_param);
-
-/*
- * Enumerations of subtitle attributes for MM_MESSAGE_UPDATE_SUBTITLE messages type.
- */
-typedef enum  {
-	/**< region */
-	MM_MSG_SUB_ATTRI_REGION_X_POS = 0,	/**< x position of subtitle region, float type */
-	MM_MSG_SUB_ATTRI_REGION_Y_POS,		/**< y position of subtitle region, float type  */
-	MM_MSG_SUB_ATTRI_REGION_WIDTH,		/**< width of subtitle region, float type  */
-	MM_MSG_SUB_ATTRI_REGION_HEIGHT,	/**< height of subtitle region, float type  */
-	/**< window */
-	MM_MSG_SUB_ATTRI_WINDOW_X_PADDING,	/**< x padding of subtitle window, float type  */
-	MM_MSG_SUB_ATTRI_WINDOW_Y_PADDING,	/**< y padding of subtitle window, float type  */
-	MM_MSG_SUB_ATTRI_WINDOW_L_MARGIN,	/**< left margin of subtitle window, int type  */
-	MM_MSG_SUB_ATTRI_WINDOW_R_MARGIN,	/**< right margin of subtitle window, int type  */
-	MM_MSG_SUB_ATTRI_WINDOW_T_MARGIN,	/**< top margin of subtitle window, int type  */
-	MM_MSG_SUB_ATTRI_WINDOW_B_MARGIN,	/**< bottom margin of subtitle window, int type  */
-	MM_MSG_SUB_ATTRI_WINDOW_BG_COLOR,	/**< background color of subtitle window, int type  */
-	MM_MSG_SUB_ATTRI_WINDOW_OPACITY,	/**< opacity of subtitle window, float type  */
-	MM_MSG_SUB_ATTRI_WINDOW_SHOW_BG,	/**< how to show window background, uint type  */
-	/**< font */
-	MM_MSG_SUB_ATTRI_FONT_FAMILY,	/**< family of subtitle font, char* type  */
-	MM_MSG_SUB_ATTRI_FONT_SIZE,		/**< size of subtitle font, float type  */
-	MM_MSG_SUB_ATTRI_FONT_WEIGHT,	/**< weight of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_STYLE,		/**< style of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_COLOR,		/**< color of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_BG_COLOR,	/**< backgroung color of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_OPACITY,	/**< opacity of subtitle font, float type  */
-	MM_MSG_SUB_ATTRI_FONT_BG_OPACITY,	/**< background opacity of subtitle font, float type  */
-	MM_MSG_SUB_ATTRI_FONT_TOC,		/**< text outline color of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_TOT,		/**< text outline thickness of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_TOBR,		/**< text outline blur radius of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_V_ALIGN,	/**< vertical alignment of subtitle font, int type  */
-	MM_MSG_SUB_ATTRI_FONT_H_ALIGN,	/**< horizontal alignment of subtitle font, int type  */
-} MMMessageSubAttriType;
-
-/**
- * Subtitle attribute Parameter.
- */
-typedef struct {
-	MMMessageSubAttriType attri_type;	/**< subtitle attributes type */
-	unsigned int start_pos;	/**< the start position among a subtitle line from where the attribute start to apply */
-	unsigned int stop_pos;	/**< the stop position among a subtitle line at where the attribute stop to apply */
-	union {
-		int _int;
-		unsigned int _uint;
-		float _float;
-		char *_str;
-	};
-} MMSubAttribute;
-
-/**
- * Subtitle invalid attributes define.
- */
-#define MM_SUB_ATTRI_INT_INVALID -1
-#define MM_SUB_ATTRI_UINT_INVALID (unsigned int)(-1)
-#define MM_SUB_ATTRI_FLOAT_INVALID 0.0
-#define MM_SUB_ATTRI_STR_INVALID NULL
-
 
 /**
  * Message Parameter.
@@ -311,11 +270,7 @@ typedef struct {
  * subtitle
  */
 		struct {
-			unsigned long timestamp;		/**< timestamp */
-			unsigned long duration;			/**< duration */
-			unsigned int type;			/**< text or picture. the value of type is 0 if it's text, 1 if it's picture. */
-			unsigned int attri_count;		/**< attributes count */
-			MMSubAttribute **attributes;		/**< attributes of MMSubAttribute type. */
+			unsigned long duration;         /**< duration */
 		} subtitle;
 
 /**
@@ -324,6 +279,14 @@ typedef struct {
 		struct {
 			int frequency;                  /**< detected active frequency with MM_MESSAGE_RADIO_SCAN_INFO */
 		} radio_scan;
+
+/**
+ * Radio RDS PS and RT Info
+ */
+		struct {
+			int frequency;                /**< The frequency at which the RDS data was obtained> */
+			char* rt_ps;                  /**< the radio text obtained with MM_MESSAGE_RADIO_RDS_PS and MM_MESSAGE_RADIO_RDS_RT */
+		} radio_rds_text;
 /**
  * Recording status
  */
@@ -340,6 +303,20 @@ typedef struct {
  * Recording volume level - dB
  */
 		float rec_volume_dB;
+
+		struct {
+			void * consumed_buffer;
+
+		} consumed_mediabuffer;
+
+	/**
+	 * Video frame capture
+	 */
+		struct {
+			unsigned int width; 					/* width of captured image */
+			unsigned int height;					/* height of captured image */
+			unsigned int orientation;				/* orientation of captured image */
+		} captured_frame;
 	};
 
 	int size;       /**< Allocated size of 'data' */

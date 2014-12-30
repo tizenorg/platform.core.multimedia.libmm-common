@@ -50,15 +50,14 @@ int mmf_value_copy(mmf_value_t *dest, const mmf_value_t *src)
 		dest->value.d_val = src->value.d_val;
 		break;
 	case MM_ATTRS_TYPE_STRING:
-		if (src->value.s_val)
-		{
-			dest->value.s_val = strdup(src->value.s_val);
-			dest->size = src->size;
-		}
-		else
-		{
+		if (dest->value.s_val) {
+			free(dest->value.s_val);
 			dest->value.s_val = NULL;
 			dest->size = 0;
+		}
+		if (src->value.s_val) {
+			dest->value.s_val = strdup(src->value.s_val);
+			dest->size = src->size;
 		}
 		break;
 	case MM_ATTRS_TYPE_DATA:
@@ -143,19 +142,19 @@ void mmf_value_dump(const mmf_value_t *value)
 	return_if_fail(value);
 	switch (value->type) {
 	case MMF_VALUE_TYPE_INT:
-		mmf_debug(MMF_DEBUG_LOG, "value[int]: %d\n", value->value.i_val);
+		//mmf_debug(MMF_DEBUG_LOG, "value[int]: %d\n", value->value.i_val);
 		break;
 	case MMF_VALUE_TYPE_DOUBLE:
-		mmf_debug(MMF_DEBUG_LOG, "value[double]: %f\n", value->value.d_val);
+		//mmf_debug(MMF_DEBUG_LOG, "value[double]: %f\n", value->value.d_val);
 		break;
 	case MMF_VALUE_TYPE_STRING:
-		mmf_debug(MMF_DEBUG_LOG, "value[string]: %s\n", value->value.s_val);
+		//mmf_debug(MMF_DEBUG_LOG, "value[string]: %s\n", value->value.s_val);
 		break;
 	case MMF_VALUE_TYPE_DATA:
-		mmf_debug(MMF_DEBUG_LOG, "value[data]: %p\n", value->value.p_val);
+		//mmf_debug(MMF_DEBUG_LOG, "value[data]: %p\n", value->value.p_val);
 		break;
 	default:
-		mmf_debug(MMF_DEBUG_LOG, "value invalid!!\n");
+		//mmf_debug(MMF_DEBUG_LOG, "value invalid!!\n");
 		break;
 	}
 }
@@ -348,7 +347,7 @@ bool mmf_attribute_validate_int(mmf_attribute_t *item, int val)
 		if (val < item->value_spec.spec.int_spec.range.min || 
 				val > item->value_spec.spec.int_spec.range.max) {
 			valid = false;
-			mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of range\n", item->name);
+			//mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of range\n", item->name);
 		}
 		break;
 	case MMF_VALUE_SPEC_INT_ARRAY:
@@ -360,7 +359,7 @@ bool mmf_attribute_validate_int(mmf_attribute_t *item, int val)
 			}
 		}
 		if (!valid) {
-			mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of array\n", item->name);
+			//mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of array\n", item->name);
 		}
 		break;
 	default:
@@ -383,7 +382,7 @@ bool mmf_attribute_validate_double(mmf_attribute_t *item, double val)
 		if (val < item->value_spec.spec.double_spec.range.min || 
 				val > item->value_spec.spec.double_spec.range.max) {
 			valid = false;
-			mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of range\n", item->name);
+			//mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of range\n", item->name);
 		}
 		break;
 	case MMF_VALUE_SPEC_DOUBLE_ARRAY:
@@ -395,7 +394,7 @@ bool mmf_attribute_validate_double(mmf_attribute_t *item, double val)
 			}
 		}
 		if (!valid) {
-			mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of array\n", item->name);
+			//mmf_debug(MMF_DEBUG_LOG, "[mmf_attribute:%s] out of array\n", item->name);
 		}
 		break;
 	default:
@@ -510,12 +509,26 @@ MMHandleType mmf_attrs_new(int count)
 	return_val_if_fail(count > 0, 0);
 	mmf_attrs_t *attrs;
 	attrs = (mmf_attrs_t *) malloc (sizeof(mmf_attrs_t));
+
+	if (attrs == NULL) {
+		debug_error("malloc failed");
+		return 0;
+	}
+
 	attrs->count = count;
 	attrs->items = (mmf_attribute_t *) malloc (sizeof(mmf_attribute_t) * count);
 	memset(attrs->items, 0, sizeof(mmf_attribute_t) * count);
 
 	if (pthread_mutex_init(&attrs->write_lock, NULL) != 0) {
-		mmf_debug(MMF_DEBUG_ERROR, "mutex init failed");
+		//mmf_debug(MMF_DEBUG_ERROR, "mutex init failed");
+		if (attrs) {
+			if (attrs->items) {
+				free(attrs->items);
+				attrs->items = NULL;
+			}
+			free(attrs);
+			attrs=NULL;
+		}
 		return 0;
 	}
 
@@ -533,6 +546,9 @@ MMHandleType mmf_attrs_new_from_data(const char *name,
 	mmf_attrs_t *attrs;
 
 	h = mmf_attrs_new(count);
+	if(!h) {
+		return 0;
+	}
 	mmf_attrs_init(h, info, count);
 	attrs = (mmf_attrs_t *) h;
 	attrs->name = NULL;
@@ -608,7 +624,7 @@ int mmf_attrs_init(MMHandleType h, mmf_attrs_construct_info_t *info, int count)
 			mmf_value_set_data(&attrs->items[i].value, info[i].default_value,size);
 			break;
 		default:
-			mmf_debug(MMF_DEBUG_LOG, "ERROR: Invalid MMF_VALUE_TYPE\n");
+			//mmf_debug(MMF_DEBUG_LOG, "ERROR: Invalid MMF_VALUE_TYPE\n");
 			assert(0);
 			break;
 		}
@@ -738,4 +754,3 @@ int mmf_attrs_set_valid_double_array(MMHandleType h, int idx, const double *arra
 	assert(attrs->items[idx].value_spec.type == MMF_VALUE_SPEC_DOUBLE_ARRAY);
 	return mmf_value_spec_set_double_array(&attrs->items[idx].value_spec, array, count, dval);
 }
-
