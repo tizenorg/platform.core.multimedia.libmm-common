@@ -349,6 +349,7 @@ enum MMFileFormatType {
         MM_FILE_FORMAT_WMV,             /**< WMV file format */
         MM_FILE_FORMAT_JPG,             /**< JPEG file format */
         MM_FILE_FORMAT_FLAC,				/**< FLAC file format */
+        MM_FILE_FORMAT_M2TS,            /**< MPEG2-TransportStream file format */
         MM_FILE_FORMAT_NUM,             /**< Number of file format type */
 };
 
@@ -379,8 +380,9 @@ typedef enum {
 	MM_PIXEL_FORMAT_RGB888,         /**< RGB888 pixel format */
 	MM_PIXEL_FORMAT_RGBA,           /**< RGBA pixel format */
 	MM_PIXEL_FORMAT_ARGB,           /**< ARGB pixel format */
-	MM_PIXEL_FORMAT_ENCODED,        /**< Encoded pixel format */
+	MM_PIXEL_FORMAT_ENCODED,        /**< Encoded pixel format : JPEG */
 	MM_PIXEL_FORMAT_ITLV_JPEG_UYVY,	/**< FIXME: JPEG+UYVY Interleaved format */
+	MM_PIXEL_FORMAT_ENCODED_H264,	/**< Encoded pixel format : H.264 */
 	MM_PIXEL_FORMAT_NUM		/**< Number of the pixel format */
 } MMPixelFormatType;
 
