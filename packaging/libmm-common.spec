@@ -1,8 +1,8 @@
 Name:       libmm-common
 Summary:    Multimedia Framework Common Lib
 Version:    0.2.85
-Release:    0
-Group:      TO_BE/FILLED_IN
+Release:    1
+Group:      Multimedia/Libraries
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
 Requires(post): /sbin/ldconfig
@@ -25,13 +25,13 @@ Multimedia Framework Common Library (devel)
 %prep
 %setup -q
 
-./autogen.sh
-CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" " ./configure --prefix=%{_prefix} ; export CFLAGS
 
 %build
+CFLAGS="%{optflags} -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" "
 export CFLAGS+=" -Wall -Wcast-align -Wcast-qual -Wextra -Wno-array-bounds -Wno-empty-body -Wno-ignored-qualifiers -Wno-unused-parameter -Wshadow -Wwrite-strings -Wswitch-default -Wno-unused-but-set-parameter -Wno-unused-but-set-variable"
-
+%reconfigure
 make %{?jobs:-j%jobs}
+
 
 %install
 rm -rf %{buildroot}
@@ -39,6 +39,7 @@ rm -rf %{buildroot}
 
 
 %post -p /sbin/ldconfig
+
 
 %postun -p /sbin/ldconfig
 
