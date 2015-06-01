@@ -131,7 +131,8 @@
 #define MM_ERROR_RADIO_NO_OP				(MM_ERROR_RADIO_CLASS | 0x06)		/**< Radio is in desired state */
 #define MM_ERROR_RADIO_DEVICE_NOT_OPENED		(MM_ERROR_RADIO_CLASS | 0x07)		/**< Failed to opne radio devide */
 #define MM_ERROR_RADIO_DEVICE_NOT_FOUND			(MM_ERROR_RADIO_CLASS | 0x08)		/**< Failed to find  radio devide */
-#define MM_ERROR_RADIO_PERMISSION_DENIED		(MM_ERROR_RADIO_CLASS | 0x08)		/**< not supported permission */
+#define MM_ERROR_RADIO_PERMISSION_DENIED		(MM_ERROR_RADIO_CLASS | 0x09)		/**< Not supported permission */
+#define MM_ERROR_RADIO_NO_ANTENNA		(MM_ERROR_RADIO_CLASS | 0x0a)		/**<  No antenna error */
 
 
 /*
