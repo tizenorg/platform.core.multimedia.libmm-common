@@ -517,6 +517,7 @@ MMHandleType mmf_attrs_new(int count)
 
 	attrs->count = count;
 	attrs->items = (mmf_attribute_t *) malloc (sizeof(mmf_attribute_t) * count);
+	return_val_if_fail(attrs->items, 0);
 	memset(attrs->items, 0, sizeof(mmf_attribute_t) * count);
 
 	if (pthread_mutex_init(&attrs->write_lock, NULL) != 0) {
