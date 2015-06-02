@@ -69,7 +69,6 @@ enum MMVideoDeviceType {
 	MM_VIDEO_DEVICE_NONE = -1,	/**< No camera */
 	MM_VIDEO_DEVICE_CAMERA0,	/**< Primary camera */
 	MM_VIDEO_DEVICE_CAMERA1,	/**< Secondary camera */
-	MM_VIDEO_DEVICE_CAMERAPLEX, /**< Primary camera + Secondary camera */
 	MM_VIDEO_DEVICE_NUM,		/**< Number of video capture devices */
 };
 
@@ -348,8 +347,8 @@ enum MMFileFormatType {
         MM_FILE_FORMAT_WMA,             /**< WMA file format */
         MM_FILE_FORMAT_WMV,             /**< WMV file format */
         MM_FILE_FORMAT_JPG,             /**< JPEG file format */
-        MM_FILE_FORMAT_FLAC,				/**< FLAC file format */
-        MM_FILE_FORMAT_M2TS,            /**< MPEG2-TransportStream file format */
+        MM_FILE_FORMAT_FLAC,            /**< FLAC file format */
+        MM_FILE_FORMAT_M2TS,            /**< MPEG2-Transport Stream file format */
         MM_FILE_FORMAT_NUM,             /**< Number of file format type */
 };
 
@@ -498,6 +497,49 @@ typedef enum  {
 	MM_DISPLAY_METHOD_CUSTOM_ROI_FULL_SCREEN = 0,
 	MM_DISPLAY_METHOD_CUSTOM_ROI_LETER_BOX
 }MMDisplayGeometryMethodRoiMode;
+
+
+#define MM_VIDEO_BUFFER_PLANE_MAX   4	/**< Max num of video buffer plane */
+/*
+ * Enumerations of multimedia video buffer type
+ */
+typedef enum {
+	MM_VIDEO_BUFFER_TYPE_PHYSICAL_ADDRESS = 0,
+	MM_VIDEO_BUFFER_TYPE_DMABUF_FD,
+	MM_VIDEO_BUFFER_TYPE_TBM_BO
+} MMVideoBufferType;
+
+typedef struct {
+	void *paddr[MM_VIDEO_BUFFER_PLANE_MAX];         /**< physical address */
+	int dmabuf_fd[MM_VIDEO_BUFFER_PLANE_MAX];       /**< dmabuf fd */
+	void *bo[MM_VIDEO_BUFFER_PLANE_MAX];            /**< TBM bo */
+} MMVideoBufferHandle;
+
+/*
+ * Type definition of multimedia video buffer
+ */
+typedef struct {
+	MMVideoBufferType type;                                 /**< buffer type
+                                                                     - The field of handle that type indicates should be filled,
+                                                                       and other fields of handle are optional. */
+	MMPixelFormatType format;                               /**< buffer type */
+	int plane_num;                                          /**< number of planes */
+	int width[MM_VIDEO_BUFFER_PLANE_MAX];                   /**< width of buffer */
+	int height[MM_VIDEO_BUFFER_PLANE_MAX];                  /**< height of buffer */
+	int stride_width[MM_VIDEO_BUFFER_PLANE_MAX];            /**< stride width of buffer */
+	int stride_height[MM_VIDEO_BUFFER_PLANE_MAX];           /**< stride height of buffer */
+	int size[MM_VIDEO_BUFFER_PLANE_MAX];                    /**< size of planes */
+	void *data[MM_VIDEO_BUFFER_PLANE_MAX];                  /**< data pointer(user address) of planes */
+	int handle_num;                                         /**< number of buffer handle */
+	int handle_size[MM_VIDEO_BUFFER_PLANE_MAX];             /**< size of handles */
+	MMVideoBufferHandle handle;                             /**< handle of buffer */
+	int is_secured;                                         /**< secured buffer flag. ex) TrustZone memory, user can not access it. */
+	int flush_request;                                      /**< flush request flag
+                                                                     - If this flag is TRUE, sink element will make copy of last buffer,
+                                                                       and it will return all buffers from src element.
+                                                                       Then, src element can restart without changing pipeline state. */
+} MMVideoBuffer;
+
 
 #ifdef __cplusplus
 	}
