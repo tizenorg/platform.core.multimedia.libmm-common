@@ -349,6 +349,9 @@ enum MMFileFormatType {
         MM_FILE_FORMAT_JPG,             /**< JPEG file format */
         MM_FILE_FORMAT_FLAC,            /**< FLAC file format */
         MM_FILE_FORMAT_M2TS,            /**< MPEG2-Transport Stream file format */
+        MM_FILE_FORMAT_M2PS,			/**< MPEG2-Program Stream file format */
+        MM_FILE_FORMAT_M1VIDEO,		/**< MPEG1-Video file format */
+        MM_FILE_FORMAT_M1AUDIO,		/**< MPEG1-Audio file format */
         MM_FILE_FORMAT_NUM,             /**< Number of file format type */
 };
 
