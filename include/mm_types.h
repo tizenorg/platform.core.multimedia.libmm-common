@@ -91,6 +91,7 @@ typedef enum {
 	MM_DISPLAY_SURFACE_GL,                 /**< GL surface */
 	MM_DISPLAY_SURFACE_NULL,               /**< This just disposes of buffers */
 	MM_DISPLAY_SURFACE_X_EXT,              /**< X extension surface - for OSP videotexture(using multi-xpixmap) */
+	MM_DISPLAY_SURFACE_REMOTE,             /**< Daemon client surface */
 	MM_DISPLAY_SURFACE_NUM,                /**< number of enum */
 } MMDisplaySurfaceType;
 
