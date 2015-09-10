@@ -78,6 +78,7 @@ enum MMMessageType {
 	MM_MESSAGE_DRM_NO_LICENSE,			/**< No license */
 	MM_MESSAGE_DRM_EXPIRED,				/**< Expired license */
 	MM_MESSAGE_DRM_FUTURE_USE,			/**< License for future use */
+	MM_MESSAGE_VIDEO_BIN_CREATED,		/**< Video bin is created */
 
 	/* CAMCORDER */
 	MM_MESSAGE_CAMCORDER_STATE_CHANGED = 0x200,	/**< State changed.*/
