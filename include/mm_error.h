@@ -52,6 +52,7 @@
 #define MM_ERROR_IMAGE_CLASS			0x80000a00		/**< Category for describing image error group */
 #define MM_ERROR_MGR_CLASS			0x80000c00		/**< Category for describing message error group */
 #define MM_ERROR_POLICY_CLASS			0x80000b00		/**< Category for Policy */
+#define MM_ERROR_RESOURCE_CLASS		0x80000f00		/**< Category for Resource */
 #define MM_ERROR_NOT_IMPLEMENTED		0x80000d00		/**< Error message for not implemented functions */
 #define MM_ERROR_TRANSCODE_CLASS		0x80000e00		/**< Error message for not implemented functions */
 
@@ -218,7 +219,6 @@
 
 #define MM_ERROR_PLAYER_SOUND_EFFECT_NOT_SUPPORTED_FILTER		(MM_ERROR_PLAYER_CLASS | 0x51)		/**< Not supported filter */
 #define MM_ERROR_PLAYER_SOUND_EFFECT_INVALID_STATUS			(MM_ERROR_PLAYER_CLASS | 0x52)		/**< Invalid status */
-
 
 /*
 	MM_CAMCORDER_ERROR_CLASS
@@ -387,6 +387,13 @@
 /**
 	@}
 */
+
+/*
+	 MM_ERROR_RESOURCE_CLASS
+ */
+#define MM_ERROR_RESOURCE_NOT_INITIALIZED			(MM_ERROR_RESOURCE_CLASS | 0x01)		/**< Not initialized */
+#define MM_ERROR_RESOURCE_INTERNAL				(MM_ERROR_RESOURCE_CLASS | 0x02)		/**< Internal errors */
+#define MM_ERROR_RESOURCE_INVALID_STATE				(MM_ERROR_RESOURCE_CLASS | 0x03)		/**< Invalid state */
 
 
 #ifdef __cplusplus
