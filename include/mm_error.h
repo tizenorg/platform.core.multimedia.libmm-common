@@ -45,19 +45,18 @@
 #define MM_ERROR_SOUND_CLASS			0x80000200		/**< Category for describing sound error group */
 #define MM_ERROR_RADIO_CLASS			0x80000300		/**< Category for describing radio error group */
 #define MM_ERROR_PLAYER_CLASS			0x80000400		/**< Category for describing player error group */
+#define MM_ERROR_RESOURCE_CLASS		0x80000500		/**< Category for describing resource error group */
 #define MM_ERROR_FILE_CLASS			0x80000600		/**< Category for describing file error group */
 #define MM_ERROR_STREAMRECORDER_CLASS		0x80000700      /**< Category for describing streamrecorder error group */
 #define MM_ERROR_CAMCORDER_CLASS		0x80000800		/**< Category for describing camcorder error group */
 #define MM_ERROR_WFD_CLASS		0x80000900		/**< Category for describing wifi-display error group */
 #define MM_ERROR_IMAGE_CLASS			0x80000a00		/**< Category for describing image error group */
-#define MM_ERROR_MGR_CLASS			0x80000c00		/**< Category for describing message error group */
 #define MM_ERROR_POLICY_CLASS			0x80000b00		/**< Category for Policy */
-#define MM_ERROR_RESOURCE_CLASS		0x80000f00		/**< Category for Resource */
-#define MM_ERROR_NOT_IMPLEMENTED		0x80000d00		/**< Error message for not implemented functions */
-#define MM_ERROR_TRANSCODE_CLASS		0x80000e00		/**< Error message for not implemented functions */
+#define MM_ERROR_MGR_CLASS			0x80000c00		/**< Category for describing message error group */
+#define MM_ERROR_TRANSCODE_CLASS		0x80000d00		/**< Error message for describing transcode error group */
 
 /*
-      MM_ERROR_CLASS
+	MM_ERROR_CLASS
 */
 #define MM_ERROR_UNKNOWN			(MM_ERROR_CLASS | 0x00)		/**< Unclassified error */
 #define MM_ERROR_INVALID_ARGUMENT		(MM_ERROR_CLASS | 0x01)		/**< Invalid argument */
@@ -69,7 +68,7 @@
 #define MM_ERROR_FILE_WRITE			(MM_ERROR_CLASS | 0x07)		/**< Fail to write data to file */
 #define MM_ERROR_END_OF_FILE			(MM_ERROR_CLASS | 0x08)		/**< End of file */
 #define MM_ERROR_NOT_SUPPORT_API		(MM_ERROR_CLASS | 0x09)		/**< Not supported API*/
-
+#define MM_ERROR_NOT_IMPLEMENTED		(MM_ERROR_CLASS | 0x0a)		/**< Error message for not implemented functions */
 
 /*
 	MM_ERROR_COMMON_CLASS
@@ -122,7 +121,7 @@
 
 
 /*
-	 MM_ERROR_RADIO_CLASS
+	MM_ERROR_RADIO_CLASS
  */
 #define MM_ERROR_RADIO_NOT_INITIALIZED			(MM_ERROR_RADIO_CLASS | 0x01)		/**< Radio instance is not initialized */
 #define MM_ERROR_RADIO_NO_FREE_SPACE			(MM_ERROR_RADIO_CLASS | 0x02)		/**< Not enough memory */
@@ -219,6 +218,15 @@
 
 #define MM_ERROR_PLAYER_SOUND_EFFECT_NOT_SUPPORTED_FILTER		(MM_ERROR_PLAYER_CLASS | 0x51)		/**< Not supported filter */
 #define MM_ERROR_PLAYER_SOUND_EFFECT_INVALID_STATUS			(MM_ERROR_PLAYER_CLASS | 0x52)		/**< Invalid status */
+
+
+/*
+	MM_ERROR_RESOURCE_CLASS
+ */
+#define MM_ERROR_RESOURCE_NOT_INITIALIZED			(MM_ERROR_RESOURCE_CLASS | 0x01)		/**< Not initialized */
+#define MM_ERROR_RESOURCE_INTERNAL				(MM_ERROR_RESOURCE_CLASS | 0x02)		/**< Internal errors */
+#define MM_ERROR_RESOURCE_INVALID_STATE				(MM_ERROR_RESOURCE_CLASS | 0x03)		/**< Invalid state */
+
 
 /*
 	MM_CAMCORDER_ERROR_CLASS
@@ -343,7 +351,7 @@
 #define MM_ERROR_TRANSCODE_SEEK_FAILED				(MM_ERROR_TRANSCODE_CLASS | 0x27)	/**< Transcode video seek  failed */
 
 /*
- *  MM_ERROR_FILE_CLASS
+	MM_ERROR_FILE_CLASS
  */
 #define MM_ERROR_FILE_INTERNAL			(MM_ERROR_FILE_CLASS | 0x01)		/**< Internal error */
 #define MM_ERROR_FILE_UNKNOWN_FORMAT		(MM_ERROR_FILE_CLASS | 0x02)		/**< Unknown file format */
@@ -387,14 +395,6 @@
 /**
 	@}
 */
-
-/*
-	 MM_ERROR_RESOURCE_CLASS
- */
-#define MM_ERROR_RESOURCE_NOT_INITIALIZED			(MM_ERROR_RESOURCE_CLASS | 0x01)		/**< Not initialized */
-#define MM_ERROR_RESOURCE_INTERNAL				(MM_ERROR_RESOURCE_CLASS | 0x02)		/**< Internal errors */
-#define MM_ERROR_RESOURCE_INVALID_STATE				(MM_ERROR_RESOURCE_CLASS | 0x03)		/**< Invalid state */
-
 
 #ifdef __cplusplus
 	}
