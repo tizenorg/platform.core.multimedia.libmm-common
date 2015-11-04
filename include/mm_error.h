@@ -95,7 +95,7 @@
 #define MM_ERROR_SOUND_SEEK				(MM_ERROR_SOUND_CLASS | 0x08)		/**< Seek related errors */
 #define MM_ERROR_SOUND_INVALID_POINTER			(MM_ERROR_SOUND_CLASS | 0x09)		/**< Invalid pointer */
 #define MM_ERROR_SOUND_PERMISSION_DENIED		(MM_ERROR_SOUND_CLASS | 0x0a)		/**< Permission Denied */
-#define MM_ERROR_SOUND_NOT_SUPPORTED_OPERATION		(MM_ERROR_SOUND_CLASS | 0x10)		/**< Not supported operation */
+#define MM_ERROR_SOUND_INVALID_OPERATION		(MM_ERROR_SOUND_CLASS | 0x10)		/**< Invalid operation */
 #define MM_ERROR_SOUND_NO_DATA				(MM_ERROR_SOUND_CLASS | 0x11)		/**< No data */
 
 #define MM_ERROR_SOUND_INVALID_FILE			(MM_ERROR_SOUND_CLASS | 0x21)		/**< Invalid file */
