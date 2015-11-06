@@ -101,6 +101,7 @@ enum MMMessageType {
 	MM_MESSAGE_CAMCORDER_LOW_LIGHT_STATE,		/**< Low light state */
 	MM_MESSAGE_CAMCORDER_CAPTURE_SOUND,		/**< Noti to play capture sound - only single capture available */
 	MM_MESSAGE_CAMCORDER_CAPTURE_SOUND_COMPLETED,	/**< Noti to play capture sound completed - only single capture available */
+	MM_MESSAGE_CAMCORDER_STATE_CHANGED_BY_RM,	/**< State change by resource manager.*/
 
 	/* RADIO */
 	MM_MESSAGE_RADIO_SCAN_START = 0x300,		/**< Radio frequency scanning initiated */
