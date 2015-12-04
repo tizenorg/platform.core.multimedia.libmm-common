@@ -132,6 +132,11 @@ enum MMMessageType {
 	MM_MESSAGE_STREAMRECORDER_ERROR 			= 0x800,
 	MM_MESSAGE_STREAMRECORDER_CONSUME_COMPLETE,
 	MM_MESSAGE_STREAMRECORDER_STATE_CHANGED,
+	MM_MESSAGE_STREAMRECORDER_MAX_SIZE,		/**< Maximum size, streamcorder waits for user's order (commit/cancel).*/
+	MM_MESSAGE_STREAMRECORDER_NO_FREE_SPACE,	/**< No free space,streamcorder waits for user's order (commit/cancel).*/
+	MM_MESSAGE_STREAMRECORDER_TIME_LIMIT,		/**< Time limit, streamcorder waits for user's order (commit/cancel)*/
+	MM_MESSAGE_STREAMRECORDER_RECORDING_STATUS,	/**< Recording status. (Elapsed time, total time, file size(KB))*/
+	MM_MESSAGE_STREAMRECORDER_VIDEO_CAPTURED,	/**< Video captured */
 
 	MM_MESSAGE_NUM,					/**< The number of the messages */
 };
