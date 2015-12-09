@@ -137,6 +137,7 @@ enum MMMessageType {
 	MM_MESSAGE_STREAMRECORDER_TIME_LIMIT,		/**< Time limit, streamcorder waits for user's order (commit/cancel)*/
 	MM_MESSAGE_STREAMRECORDER_RECORDING_STATUS,	/**< Recording status. (Elapsed time, total time, file size(KB))*/
 	MM_MESSAGE_STREAMRECORDER_VIDEO_CAPTURED,	/**< Video captured */
+	MM_MESSAGE_STREAMRECORDER_AUDIO_CAPTURED,	/**< Audio captured */
 
 	MM_MESSAGE_NUM,					/**< The number of the messages */
 };
