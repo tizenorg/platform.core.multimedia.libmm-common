@@ -86,11 +86,12 @@ enum MMAudioDeviceType {
  * Enumerations of display surfaces.
  */
 typedef enum {
-	MM_DISPLAY_SURFACE_X,                  /**< X surface - default */
+	MM_DISPLAY_SURFACE_X,                  /**< X surface - deprecated */
+	MM_DISPLAY_SURFACE_OVERLAY,            /**< Overlay surface - default */
 	MM_DISPLAY_SURFACE_EVAS,               /**< Evas object surface */
 	MM_DISPLAY_SURFACE_GL,                 /**< GL surface */
 	MM_DISPLAY_SURFACE_NULL,               /**< This just disposes of buffers */
-	MM_DISPLAY_SURFACE_X_EXT,              /**< X extension surface - for OSP videotexture(using multi-xpixmap) */
+	MM_DISPLAY_SURFACE_X_EXT,              /**< X extension surface - for OSP videotexture(using multi-xpixmap) - deprecated */
 	MM_DISPLAY_SURFACE_REMOTE,             /**< Daemon client surface */
 	MM_DISPLAY_SURFACE_NUM,                /**< number of enum */
 } MMDisplaySurfaceType;
