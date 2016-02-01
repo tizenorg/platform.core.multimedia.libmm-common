@@ -167,7 +167,8 @@
 #define MM_ERROR_PLAYER_DRM_NOT_AUTHORIZED				(MM_ERROR_PLAYER_CLASS | 0x1c)          /**< Not authorized */
 #define MM_ERROR_PLAYER_DRM_OUTPUT_PROTECTION				(MM_ERROR_PLAYER_CLASS | 0x1d)          /**< Output protected */
 #define MM_ERROR_PLAYER_RESOURCE_LIMIT					(MM_ERROR_PLAYER_CLASS | 0x1e)          /**< Resource limit */
-#define MM_ERROR_PLAYER_PERMISSION_DENIED					(MM_ERROR_PLAYER_CLASS | 0x1f)          /**< Permission denied */
+#define MM_ERROR_PLAYER_PERMISSION_DENIED				(MM_ERROR_PLAYER_CLASS | 0x1f)          /**< Permission denied */
+#define MM_ERROR_PLAYER_BUFFER_SPACE					(MM_ERROR_PLAYER_CLASS | 0x20)          /**< No buffer space available */
 
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_AUDIO			(MM_ERROR_PLAYER_CLASS | 0x22)		/**< Unsupported audio  */
 #define MM_ERROR_PLAYER_STREAMING_UNSUPPORTED_VIDEO			(MM_ERROR_PLAYER_CLASS | 0x23)		/**< Unsupported video  */
