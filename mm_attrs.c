@@ -252,7 +252,7 @@ int mm_attrs_set_string(MMHandleType h, int idx, const char *string, int size)
 }
 
 
-int mm_attrs_get_string(MMHandleType h, int idx,char **sval, int *size)
+int mm_attrs_get_string(MMHandleType h, int idx, char **sval, int *size)
 {
 	mmf_attrs_t *attrs = (mmf_attrs_t *) h;
 	return_val_if_fail(attrs && idx >= 0 && idx < attrs->count && sval, MM_ERROR_COMMON_INVALID_ARGUMENT);
@@ -428,7 +428,7 @@ int mm_attrs_get_double_by_name(MMHandleType attrs, const char *name, double *va
 int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *attribute_name, va_list var_args)
 {
 	const char *name = NULL;
-	int ret = MM_ERROR_NONE;
+	unsigned int ret = MM_ERROR_NONE;
 
 	return_val_if_fail(attrs, MM_ERROR_COMMON_INVALID_ARGUMENT);
 //	return_val_if_fail(err_attr_name, MM_ERROR_COMMON_INVALID_ARGUMENT);
@@ -528,7 +528,7 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 int mm_attrs_get_valist (MMHandleType attrs, char **err_attr_name, const char *attribute_name, va_list var_args)
 {
 	const char *name = NULL;
-	int ret = MM_ERROR_NONE;
+	unsigned int ret = MM_ERROR_NONE;
 
 	return_val_if_fail(attrs, MM_ERROR_COMMON_INVALID_ARGUMENT);
 //	return_val_if_fail(err_attr_name, MM_ERROR_COMMON_INVALID_ARGUMENT);
