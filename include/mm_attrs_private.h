@@ -159,7 +159,7 @@ double mmf_value_get_double(mmf_value_t *v);
 
 int mmf_value_set_string(mmf_value_t *v, const char *sval, int size);
 
-const char* mmf_value_get_string(const mmf_value_t *v, int *size);
+char* mmf_value_get_string(const mmf_value_t *v, int *size);
 
 int mmf_value_set_data(mmf_value_t *v, void *data, int size);
 

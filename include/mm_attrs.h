@@ -18,7 +18,7 @@
  * limitations under the License.
  *
  */
- 
+
 
 
 #ifndef __MM_ATTRS_H__
@@ -408,7 +408,7 @@ int mm_attrs_set_string(MMHandleType attrs, int id, const char *string, int size
  * @remarks 	Application would be responsible for managing/releasing the string
  * @see 	mm_attrs_set_string
  */
-int mm_attrs_get_string(MMHandleType attrs, int id,char **sval, int *size);
+int mm_attrs_get_string(MMHandleType attrs, int id, char **sval, int *size);
 
 
 /**
