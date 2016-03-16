@@ -252,7 +252,7 @@ int mm_attrs_set_string(MMHandleType h, int idx, const char *string, int size)
 }
 
 
-int mm_attrs_get_string(MMHandleType h, int idx,char **sval, int *size)
+int mm_attrs_get_string(MMHandleType h, int idx, const char **sval, int *size)
 {
 	mmf_attrs_t *attrs = (mmf_attrs_t *) h;
 	return_val_if_fail(attrs && idx >= 0 && idx < attrs->count && sval, MM_ERROR_COMMON_INVALID_ARGUMENT);
@@ -449,7 +449,7 @@ int mm_attrs_set_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			if (err_attr_name)
 				*err_attr_name = strdup(name);
 
-			if (ret == MM_ERROR_COMMON_OUT_OF_ARRAY) {	//to avoid confusing
+			if (ret == (int)MM_ERROR_COMMON_OUT_OF_ARRAY) {	//to avoid confusing
 				//mmf_debug(MMF_DEBUG_ERROR, "result of mm_attrs_get_index is MM_ERROR_COMMON_OUT_OF_ARRAY so return(ret = %x, name:%s)",ret, name);
 				return MM_ERROR_COMMON_ATTR_NOT_EXIST;
 			} else {
@@ -549,7 +549,7 @@ int mm_attrs_get_valist (MMHandleType attrs, char **err_attr_name, const char *a
 			if (err_attr_name)
 				*err_attr_name = strdup(name);
 
-			if (ret == MM_ERROR_COMMON_OUT_OF_ARRAY)	//to avoid confusing
+			if (ret == (int)MM_ERROR_COMMON_OUT_OF_ARRAY)	//to avoid confusing
 				return MM_ERROR_COMMON_ATTR_NOT_EXIST;
 			else
 				return ret;
