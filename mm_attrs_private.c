@@ -605,11 +605,11 @@ int mmf_attrs_init(MMHandleType h, mmf_attrs_construct_info_t *info, int count)
 		case MMF_VALUE_TYPE_INT:
 			assert(attrs->items[i].value.value.i_val == 0);
 			mmf_value_set_int(&attrs->items[i].value,
-			                  (int)info[i].default_value);
+			                  (intptr_t)info[i].default_value);
 			break;
 		case MMF_VALUE_TYPE_DOUBLE:
 		{
-			int i_val = (int)info[i].default_value;
+			int i_val = (intptr_t)info[i].default_value;
 			double d_val = (double) i_val;
 			assert(attrs->items[i].value.value.d_val == 0);
 			mmf_value_set_double(&attrs->items[i].value, d_val);
